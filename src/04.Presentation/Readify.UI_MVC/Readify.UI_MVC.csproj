@@ -14,4 +14,16 @@
     <None Include="wwwroot\favicon.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Domain\Readify.Domain\Readify.Domain.csproj" />
+    <ProjectReference Include="..\..\03.Infrastrucure\Readify.Infrastructure\Readify.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
