@@ -1,14 +1,16 @@
+@font-face {
+    font-family: 'IranYekan';
+    src: url('/fonts/IRANYekanWebRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: IranYekan;
-}
-
-@font-face {
-  font-family: IranYekan;
-  src: url(IRANYekanWebRegular.woff);
-  font-weight: bold;
 }
 
 body {
@@ -17,7 +19,7 @@ body {
   direction: rtl;
 }
 
-/* Header */
+
 header {
   background-color: white;
   padding: 15px 0;
