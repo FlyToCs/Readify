@@ -1,21 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
+using Readify.Domain.BookAgg.Contracts.ServiceContracts;
+using Readify.Domain.BookAgg.DTOs;
+using Readify.Infrastructure.Persistence;
+using Readify.Infrastructure.Repository;
+using Readify.Services;
 using Readify.UI_MVC.Models;
 using System.Diagnostics;
 
 namespace Readify.UI_MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(
+        ILogger<HomeController> logger,
+        IBookService bookService,
+        ICategoryService categoryService)
+        : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger = logger;
+        private readonly IBookService _bookService = bookService;
+        private readonly ICategoryService _categoryService = categoryService;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
-            return View();
+
+            CategoryBookViewModel model = new CategoryBookViewModel()
+            {
+                Books = _bookService.GetRecentlyBooks(5),
+                Categories = _categoryService.GetPopularCategories(5)
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()

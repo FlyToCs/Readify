@@ -1,0 +1,10 @@
+﻿using Readify.Domain.BookAgg.DTOs;
+
+namespace Readify.UI_MVC.Models
+{
+    public class CategoryBookViewModel
+    {
+        public List<GetBookDto> Books { get; set; }
+        public List<GetCategoryDto> Categories { get; set; }
+    }
+}

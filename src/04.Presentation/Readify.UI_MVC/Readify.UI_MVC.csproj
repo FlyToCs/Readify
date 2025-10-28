@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\01.Domain\Readify.Domain\Readify.Domain.csproj" />
+    <ProjectReference Include="..\..\02.Services\Readify.Services\Readify.Services.csproj" />
     <ProjectReference Include="..\..\03.Infrastrucure\Readify.Infrastructure\Readify.Infrastructure.csproj" />
   </ItemGroup>
 
