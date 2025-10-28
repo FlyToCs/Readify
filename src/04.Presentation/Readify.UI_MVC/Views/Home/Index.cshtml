@@ -19,90 +19,44 @@
     <h2 class="section-title">دسته‌بندی‌ها</h2>
     
     <div class="categories">
-        <div class="category-card">
-            <div class="category-icon">🎨</div>
-            <div class="category-title">هنر و طراحی</div>
-            <div class="category-subtitle">طراحی و خلاقیت</div>
-        </div>
-        <div class="category-card">
-            <div class="category-icon">👑</div>
-            <div class="category-title">تاریخ و جغرافیا</div>
-            <div class="category-subtitle">معرفت تاریخی</div>
-        </div>
-        <div class="category-card">
-            <div class="category-icon">🎓</div>
-            <div class="category-title">فلسفه و روان‌شناسی</div>
-            <div class="category-subtitle">عمیق تر اندیشید</div>
-        </div>
-        <div class="category-card">
-            <div class="category-icon">💡</div>
-            <div class="category-title">داستان و رمان</div>
-            <div class="category-subtitle">سرگرم و جذاب</div>
-        </div>
-        <div class="category-card">
-            <div class="category-icon">📚</div>
-            <div class="category-title">پایان نامه و مقالات</div>
-            <div class="category-subtitle">تحقیق و پژوهش</div>
-        </div>
+
+        @{
+            foreach (var category in @Model.Categories)
+            {
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src="@category.ImgUrl" width="50px"/>
+                    </div>
+                    <div class="category-title">@category.Name </div>
+                    <div class="category-subtitle"> @category.Description </div>
+                </div>
+            }
+        }
+
     </div>
 
 
     <h2 class="section-title">جدیدترین کتاب‌ها</h2>
+
     <div class="books">
-        <div class="book-card">
-            <div class="book-image">
-                <img src="/Img/b5.jpg" alt="Girl in a jacket" width="260" height="280">
-            </div>
-            <div class="book-info">
-                <div class="book-title">قصه‌پرت آفرین پینوکیو</div>
-                <div class="book-author">کارلو کولودی</div>
-                <div class="book-author">200 صفحه</div>
-                <div class="book-price">550,000 ت</div>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-image">
-                <img src="/Img/b4.jpg" alt="Girl in a jacket" width="260" height="280">
-            </div>
-            <div class="book-info">
-                <div class="book-title">هالیس‌دری گوبی</div>
-                <div class="book-author">مارگارت اتوود</div>
-                <div class="book-author">200 صفحه</div>
-                <div class="book-price">380,000 ت</div>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-image">
-                <img src="/Img/b3.jpg" alt="Girl in a jacket" width="260" height="280">
-            </div>
-            <div class="book-info">
-                <div class="book-title">اصول رهبری هیوین</div>
-                <div class="book-author">ریان هالیدی</div>
-                <div class="book-author">200 صفحه</div>
-                <div class="book-price">750,000 ت</div>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-image">
-                <img src="/Img/b2.jpg" alt="Girl in a jacket" width="260" height="280">
-            </div>
-            <div class="book-info">
-                <div class="book-title">سفر به مریخ</div>
-                <div class="book-author">اندی وییر</div>
-                <div class="book-author">200 صفحه</div>
-                <div class="book-price">620,000 ت</div>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-image">
-                <img src="/Img/b1.jpg" alt="Girl in a jacket" width="260" height="280">
-            </div>
-            <div class="book-info">
-                <div class="book-title">آخرین قربانی</div>
-                <div class="book-author">کارن کلیپاتریک</div>
-                <div class="book-author">200 صفحه</div>
-                <div class="book-price">490,000 ت</div>
-            </div>
-        </div>
+
+        @{
+            foreach (var book in @Model.Books)
+            {
+                
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src=@book.ImgUrl alt="Girl in a jacket" width="260" height="280">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-title">@book.BookName </div>
+                        <div class="book-author"> @book.AuthorName</div>
+                        <div class="book-author">@book.PageCount صفحه </div>
+                        <div class="book-price">@book.Price ت</div>
+                    </div>
+                </div>
+            }
+        }
+
     </div>
 </div>
