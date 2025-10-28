@@ -1,6 +1,6 @@
-﻿using Readify.Domain.BookAgg.DTOs;
+﻿using Readify.Domain.CategoryAgg.DTOs;
 
-namespace Readify.Domain.BookAgg.Contracts.ServiceContracts;
+namespace Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 
 public interface ICategoryService
 {

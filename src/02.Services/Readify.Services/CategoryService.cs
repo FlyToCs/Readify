@@ -1,6 +1,7 @@
 ﻿using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
-using Readify.Domain.BookAgg.Contracts.ServiceContracts;
-using Readify.Domain.BookAgg.DTOs;
+using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
+using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
+using Readify.Domain.CategoryAgg.DTOs;
 
 namespace Readify.Services;
 

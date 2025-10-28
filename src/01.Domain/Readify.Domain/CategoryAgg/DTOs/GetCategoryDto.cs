@@ -1,4 +1,4 @@
-﻿namespace Readify.Domain.BookAgg.DTOs;
+﻿namespace Readify.Domain.CategoryAgg.DTOs;
 
 public class GetCategoryDto
 {

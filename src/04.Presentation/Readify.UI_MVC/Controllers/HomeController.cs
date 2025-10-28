@@ -6,6 +6,7 @@ using Readify.Infrastructure.Repository;
 using Readify.Services;
 using Readify.UI_MVC.Models;
 using System.Diagnostics;
+using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 
 namespace Readify.UI_MVC.Controllers
 {
@@ -16,8 +17,7 @@ namespace Readify.UI_MVC.Controllers
         : Controller
     {
         private readonly ILogger<HomeController> _logger = logger;
-        private readonly IBookService _bookService = bookService;
-        private readonly ICategoryService _categoryService = categoryService;
+
 
 
         public IActionResult Index()
@@ -25,8 +25,8 @@ namespace Readify.UI_MVC.Controllers
 
             CategoryBookViewModel model = new CategoryBookViewModel()
             {
-                Books = _bookService.GetRecentlyBooks(5),
-                Categories = _categoryService.GetPopularCategories(5)
+                Books = bookService.GetRecentlyBooks(5),
+                Categories = categoryService.GetPopularCategories(5)
             };
 
             return View(model);

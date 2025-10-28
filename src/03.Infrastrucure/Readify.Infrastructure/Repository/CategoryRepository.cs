@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
-using Readify.Domain.BookAgg.DTOs;
-using Readify.Domain.BookAgg.Entities;
+using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
+using Readify.Domain.CategoryAgg.DTOs;
+using Readify.Domain.CategoryAgg.Entities;
 using Readify.Infrastructure.Persistence;
 
 namespace Readify.Infrastructure.Repository;

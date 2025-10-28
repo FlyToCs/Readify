@@ -1,6 +1,7 @@
 ﻿using Readify.Domain._common.Entities;
+using Readify.Domain.BookAgg.Entities;
 
-namespace Readify.Domain.BookAgg.Entities;
+namespace Readify.Domain.CategoryAgg.Entities;
 
 public class Category : BaseEntity
 {

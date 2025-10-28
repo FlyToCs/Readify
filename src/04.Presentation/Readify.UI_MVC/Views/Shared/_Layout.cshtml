@@ -5,45 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - فروشکاه کتاب</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 
 </head>
 <body>
 
-<header>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="#">صفحه اصلی</a></li>
-            <li><a href="#">دسته بندی ها</a></li>
-            <li><a href="#">نوشتار ها</a></li>
-            <li><a href="#">درباره ما</a></li>
-            <li><a href="#">تماس با ما</a></li>
-        </ul>
-        <button class="logo">حساب کاربری</button>
-    </nav>
-</header>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">صفحه اصلی</a></li>
+                <li><a href="#">دسته بندی ها</a></li>
+                <li><a href="#">نوشتار ها</a></li>
+                <li><a href="#">درباره ما</a></li>
+                <li><a href="#">تماس با ما</a></li>
+                <li><a href="#">مدیریت محتوا</a></li>
+            </ul>
+            <a class="abtn">حساب کاربری</a>
+        </nav>
+    </header>
 
 
 
 
 
-@RenderBody()
+    @RenderBody()
 
 
 
 
-
-
-<footer>
-    <div class="footer-links">
-        <a href="#">خانه</a>
-        <a href="#">درباره ما</a>
-        <a href="#">آموزش و پشتیبانی</a>
-    </div>
-    <div class="footer-copy">
-        تمامی حقوق محفوظ است © 2025 طراحی توسط محمدحسین
-    </div>
-</footer>
+    <footer>
+        <div class="footer-links">
+            <a href="#">خانه</a>
+            <a href="#">درباره ما</a>
+            <a href="#">آموزش و پشتیبانی</a>
+        </div>
+        <div class="footer-copy">
+            تمامی حقوق محفوظ است © 2025 طراحی توسط محمدحسین
+        </div>
+    </footer>
 </body>
 </html>

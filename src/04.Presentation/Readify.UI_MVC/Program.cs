@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 using Readify.Domain.BookAgg.Contracts.ServiceContracts;
+using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
+using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 using Readify.Infrastructure.Persistence;
 using Readify.Infrastructure.Repository;
 using Readify.Services;

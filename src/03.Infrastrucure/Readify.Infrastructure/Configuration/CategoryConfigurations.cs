@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Readify.Domain.BookAgg.Entities;
+using Readify.Domain.CategoryAgg.Entities;
 
 namespace Readify.Infrastructure.Configuration;
 

@@ -1,4 +1,5 @@
 ﻿using Readify.Domain.BookAgg.DTOs;
+using Readify.Domain.CategoryAgg.DTOs;
 
 namespace Readify.UI_MVC.Models
 {

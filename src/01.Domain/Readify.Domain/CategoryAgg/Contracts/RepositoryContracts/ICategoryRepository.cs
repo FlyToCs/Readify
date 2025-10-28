@@ -1,6 +1,6 @@
-﻿using Readify.Domain.BookAgg.DTOs;
+﻿using Readify.Domain.CategoryAgg.DTOs;
 
-namespace Readify.Domain.BookAgg.Contracts.RepositoryContracts;
+namespace Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
 
 public interface ICategoryRepository
 {

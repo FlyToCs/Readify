@@ -1,4 +1,5 @@
-﻿using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 using Readify.Domain.BookAgg.DTOs;
 using Readify.Domain.BookAgg.Entities;
 using Readify.Infrastructure.Persistence;
@@ -13,7 +14,6 @@ public class BookRepository(AppDbContext context) : IBookRepository
         {
             Name = createBookDto.Name,
             AuthorName = createBookDto.AuthorName,
-            ImgUrl = createBookDto.ImgUrl,
             CategoryId = createBookDto.CategoryId,
             Price = createBookDto.Price,
             PageCount = createBookDto.PageCount
@@ -27,11 +27,12 @@ public class BookRepository(AppDbContext context) : IBookRepository
         return context.Books
             .OrderByDescending(b => b.CreatedAt)
             .Take(count)
+            .Include(b=>b.BookImgs)
             .Select(b => new GetBookDto()
             {
                 AuthorName = b.AuthorName,
                 BookName = b.Name,
-                ImgUrl = b.ImgUrl,
+                images = b.BookImgs,
                 PageCount = b.PageCount,
                 Price = b.Price
             }).ToList();
