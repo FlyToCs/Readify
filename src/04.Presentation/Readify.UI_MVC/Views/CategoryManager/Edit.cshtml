@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_ManagerLayout";
+}
+
+
+<div class="card-body">
+	<div class="px-3">
+		<form class="form">
+			<div class="form-body">
+				<div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                        <fieldset class="form-group">
+                            <label for="basicInput">نام دسته بندی</label>
+                            <input type="text" class="form-control" id="basicInput">
+                        </fieldset>
+                    </div>
+
+					<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+						<fieldset class="form-group">
+							<label for="helpInputTop">توضیحات</label>
+							<small class="text-muted"><i></i></small>
+							<input type="text" class="form-control" id="helpInputTop">
+						</fieldset>
+					</div>
+					<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+						<fieldset class="form-group">
+							<label for="disabledInput">آیدی</label>
+							<input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="شما نمی توانید من را به روز کنید:">
+
+						</fieldset>
+					</div>
+
+
+                    <button type="submit" class="btn btn-success">
+                        <i class="icon-note"></i> ذخیره
+                    </button>
+                </div>
+			</div>
+		</form>
+	</div>
+</div>
