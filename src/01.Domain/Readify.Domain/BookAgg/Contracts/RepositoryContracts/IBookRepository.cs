@@ -4,7 +4,8 @@ namespace Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 
 public interface IBookRepository
 {
-    void Create(CreateBookDto createBookDto);
+    int Create(CreateBookDto createBookDto);
     List<GetBookDto> GetRecentlyBooks(int count);
+    List<GetBookDto> GetBooks();
 
 }

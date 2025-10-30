@@ -20,5 +20,8 @@ public class BookConfigurations : IEntityTypeConfiguration<Book>
             .WithMany(c => c.Books).HasForeignKey(b => b.CategoryId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.HasMany(b => b.BookImgs).WithOne(img => img.Book).HasForeignKey(b => b.BookId)
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

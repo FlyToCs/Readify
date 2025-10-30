@@ -1,6 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Readify.Domain.BookAgg.DTOs.GetBookDto>
+    
+
 @{
     ViewData["Title"] = "کتاب ها -";
 }
@@ -17,7 +17,7 @@
                 <div class="card-header">
                     <div class="card-title-wrap bar-success">
                         <h4 class="card-title">لیست کتاب ها</h4>
-                        <a class="btn mr-1 btn-round btn-primary">افزودن</a>
+                        <a class="btn mr-1 btn-round btn-primary" asp-controller="BookManager" asp-action="Create">افزودن</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -35,55 +35,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>زهرا</td>
-                                    <td>یعقوبی</td>
-                                    <td>0123456789</td>
-                                    <td>0123456789</td>
-                                    <td>0123456789</td>
-                                    <td>
-                                        <a class="success p-0" data-original-title="" title="">
-                                            <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                        </a>
+                            @{
+                                foreach (var book in Model)
+                                {
+                                    <tr>
+                                        <td>@book.Id</td>
+                                        <td>@book.BookName</td>
+                                        <td>@book.Price</td>
+                                        <td>@book.AuthorName</td>
+                                        <td>@book.PageCount</td>
+                                            <td><img src="@book.img.ImageUrl" width="50px" /></td>
+                                        <td>
+                                            <a class="success p-0" data-original-title="" title="">
+                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                            </a>
 
-                                        <a class="danger p-0" data-original-title="" title="">
-                                            <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>کیانا</td>
-                                    <td>احمدی</td>
-                                    <td>0789654123</td>
-                                    <td>0123456789</td>
-                                    <td>0123456789</td>
-                                    <td>
-                                        <a class="success p-0" data-original-title="" title="">
-                                            <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                        </a>
-                                        <a class="danger p-0" data-original-title="" title="">
-                                            <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>نیما</td>
-                                    <td>خیابانی</td>
-                                    <td>0456987123</td>
-                                    <td>0123456789</td>
-                                    <td>0123456789</td>
-                                    <td>
-                                        <a class="success p-0" data-original-title="" title="">
-                                            <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                        </a>
-                                        <a class="danger p-0" data-original-title="" title="">
-                                            <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                            <a class="danger p-0" data-original-title="" title="">
+                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
                             </tbody>
                         </table>
                     </div>

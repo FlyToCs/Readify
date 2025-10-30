@@ -8,7 +8,7 @@ namespace Readify.Infrastructure.Repository;
 
 public class BookRepository(AppDbContext context) : IBookRepository
 {
-    public void Create(CreateBookDto createBookDto)
+    public int Create(CreateBookDto createBookDto)
     {
         var book = new Book()
         {
@@ -20,6 +20,7 @@ public class BookRepository(AppDbContext context) : IBookRepository
         };
         context.Add(book);
         context.SaveChanges();
+        return book.Id;
     }
 
     public List<GetBookDto> GetRecentlyBooks(int count)
@@ -27,12 +28,28 @@ public class BookRepository(AppDbContext context) : IBookRepository
         return context.Books
             .OrderByDescending(b => b.CreatedAt)
             .Take(count)
-            .Include(b=>b.BookImgs)
+            .Include(b => b.BookImgs)
             .Select(b => new GetBookDto()
             {
+                Id = b.Id,
                 AuthorName = b.AuthorName,
                 BookName = b.Name,
-                img = b.BookImgs.FirstOrDefault(b=>b.IsMainImg),
+                img = b.BookImgs.FirstOrDefault(b => b.IsMainImg),
+                PageCount = b.PageCount,
+                Price = b.Price
+            }).ToList();
+    }
+    public List<GetBookDto> GetBooks()
+    {
+        return context.Books
+            .OrderByDescending(b => b.CreatedAt)
+            .Include(b => b.BookImgs)
+            .Select(b => new GetBookDto()
+            {
+                Id = b.Id,
+                AuthorName = b.AuthorName,
+                BookName = b.Name,
+                img = b.BookImgs.FirstOrDefault(b => b.IsMainImg),
                 PageCount = b.PageCount,
                 Price = b.Price
             }).ToList();

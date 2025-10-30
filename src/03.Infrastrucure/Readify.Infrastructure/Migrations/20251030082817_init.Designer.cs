@@ -12,8 +12,8 @@ using Readify.Infrastructure.Persistence;
 namespace Readify.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251028084607_nulleable-updateaAt")]
-    partial class nulleableupdateaAt
+    [Migration("20251030082817_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,10 +46,6 @@ namespace Readify.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetDate()");
 
-                    b.Property<string>("ImgUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(400)
@@ -59,7 +55,8 @@ namespace Readify.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10)
+                        .HasColumnType("decimal(10,0)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -71,7 +68,39 @@ namespace Readify.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Readify.Domain.BookAgg.Entities.Category", b =>
+            modelBuilder.Entity("Readify.Domain.BookAgg.Entities.BookImg", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsMainImg")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookImgs");
+                });
+
+            modelBuilder.Entity("Readify.Domain.CategoryAgg.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +136,7 @@ namespace Readify.Infrastructure.Migrations
 
             modelBuilder.Entity("Readify.Domain.BookAgg.Entities.Book", b =>
                 {
-                    b.HasOne("Readify.Domain.BookAgg.Entities.Category", "Category")
+                    b.HasOne("Readify.Domain.CategoryAgg.Entities.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -116,7 +145,23 @@ namespace Readify.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Readify.Domain.BookAgg.Entities.Category", b =>
+            modelBuilder.Entity("Readify.Domain.BookAgg.Entities.BookImg", b =>
+                {
+                    b.HasOne("Readify.Domain.BookAgg.Entities.Book", "Book")
+                        .WithMany("BookImgs")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Readify.Domain.BookAgg.Entities.Book", b =>
+                {
+                    b.Navigation("BookImgs");
+                });
+
+            modelBuilder.Entity("Readify.Domain.CategoryAgg.Entities.Category", b =>
                 {
                     b.Navigation("Books");
                 });

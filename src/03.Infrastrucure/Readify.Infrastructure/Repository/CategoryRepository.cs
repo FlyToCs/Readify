@@ -27,11 +27,26 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
             .Take(count)
             .Select(c => new GetCategoryDto
             {
+                Id = c.Id,
                 Name = c.Name,
                 ImgUrl = c.ImgUrl,
-               Description = c.Description
+                Description = c.Description
             })
             .ToList();
     }
+    public List<GetCategoryDto> GetCategories()
+    {
+        return context.Categories
+            .OrderByDescending(c => c.Books.Count)
+            .Select(c => new GetCategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                ImgUrl = c.ImgUrl,
+                Description = c.Description
+            })
+            .ToList();
+    }
+
 
 }

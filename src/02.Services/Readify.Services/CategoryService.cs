@@ -16,4 +16,8 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
     {
         return categoryRepository.GetPopularCategories(count);
     }
+    public List<GetCategoryDto> GetCategories()
+    {
+        return categoryRepository.GetCategories();
+    }
 }
