@@ -11,6 +11,7 @@ public class BookConfigurations : IEntityTypeConfiguration<Book>
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Name).HasMaxLength(400).IsRequired();
         builder.Property(b => b.AuthorName).HasMaxLength(100).IsRequired();
+        builder.Property(b => b.Price).HasPrecision(10, 0);
 
         builder.Property(b => b.CreatedAt).HasDefaultValueSql("GetDate()")
             .ValueGeneratedOnAdd();

@@ -52,7 +52,8 @@ namespace Readify.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10)
+                        .HasColumnType("decimal(10,0)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
