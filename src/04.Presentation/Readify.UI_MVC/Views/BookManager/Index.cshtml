@@ -1,5 +1,5 @@
 ﻿@model List<Readify.Domain.BookAgg.DTOs.GetBookDto>
-    
+
 
 @{
     ViewData["Title"] = "کتاب ها -";
@@ -35,28 +35,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @{
-                                foreach (var book in Model)
-                                {
-                                    <tr>
-                                        <td>@book.Id</td>
-                                        <td>@book.BookName</td>
-                                        <td>@book.Price</td>
-                                        <td>@book.AuthorName</td>
-                                        <td>@book.PageCount</td>
+                                @{
+                                    foreach (var book in Model)
+                                    {
+                                        <tr>
+                                            <td>@book.Id</td>
+                                            <td>@book.BookName</td>
+                                            <td>@book.Price</td>
+                                            <td>@book.AuthorName</td>
+                                            <td>@book.PageCount</td>
                                             <td><img src="@book.img.ImageUrl" width="50px" /></td>
-                                        <td>
-                                            <a class="success p-0" data-original-title="" title="">
-                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                            </a>
+                                            <td>
+                                                <form asp-controller="BookManager" asp-action="Edit" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="id" value="@book.Id" />
+                                                    <button type="submit" class="btn-info btn p-1" title="ویرایش">
+                                                        ویرایش
+                                                    </button>
+                                                </form>
+                                                <form asp-controller="BookManager" asp-action="Delete" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="id" value="@book.Id" />
+                                                    <button type="submit" class="btn-danger btn p-1" title="حذف">
+                                                        حذف
+                                                    </button>
+                                                </form>
+                                            </td>
 
-                                            <a class="danger p-0" data-original-title="" title="">
-                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        </tr>
+                                    }
                                 }
-                            }
 
                             </tbody>
                         </table>

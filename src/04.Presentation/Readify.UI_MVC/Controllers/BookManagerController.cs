@@ -1,8 +1,10 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.BookAgg.DTOs;
 using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
+using Readify.Infrastructure.Repository;
+using Readify.UI_MVC.Models;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace Readify.UI_MVC.Controllers
 {
@@ -27,10 +29,36 @@ namespace Readify.UI_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-
+            bookService.Delete(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var book = bookService.GetBookById(id);
+            if (book == null) return NotFound();
+
+            var viewModel = new BookEditViewModel
+            {
+                Book = new GetBookDto()
+                {
+                    Id = book.Id,
+                    BookName = book.BookName,
+                    AuthorName = book.AuthorName,
+                    Price = book.Price,
+                    PageCount = book.PageCount,
+                    img = book.img
+                    
+                },
+                Categories = categoryService.GetCategories()
+            };
+
+            return View(viewModel);
+        }
+
+
     }
 }

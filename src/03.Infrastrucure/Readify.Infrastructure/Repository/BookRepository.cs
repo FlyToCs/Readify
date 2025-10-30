@@ -54,4 +54,25 @@ public class BookRepository(AppDbContext context) : IBookRepository
                 Price = b.Price
             }).ToList();
     }
+
+    public void Delete(int bookId)
+    {
+        context.Books.Where(b => b.Id == bookId).ExecuteDelete();
+        context.SaveChanges();
+    }
+
+    public GetBookDto? GetBookById(int id)
+    {
+        return context.Books.Where(b => b.Id == id).Select(b => new GetBookDto()
+        {
+            Id = b.Id,
+            CategoryId = b.CategoryId,
+            img = b.BookImgs.FirstOrDefault(i=>i.IsMainImg),
+            PageCount = b.PageCount,
+            Price = b.Price,
+            AuthorName = b.AuthorName,
+            BookName = b.Name
+
+        }).FirstOrDefault();
+    }
 }
