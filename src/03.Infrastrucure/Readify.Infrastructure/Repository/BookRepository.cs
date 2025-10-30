@@ -32,7 +32,7 @@ public class BookRepository(AppDbContext context) : IBookRepository
             {
                 AuthorName = b.AuthorName,
                 BookName = b.Name,
-                images = b.BookImgs,
+                img = b.BookImgs.FirstOrDefault(b=>b.IsMainImg),
                 PageCount = b.PageCount,
                 Price = b.Price
             }).ToList();

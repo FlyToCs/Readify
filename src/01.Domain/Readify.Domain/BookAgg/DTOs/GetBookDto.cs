@@ -5,7 +5,7 @@ namespace Readify.Domain.BookAgg.DTOs;
 
 public class GetBookDto
 {
-    public List<BookImg> images { get; set; } = [];
+    public BookImg img { get; set; } 
     public string BookName { get; set; }
     public decimal Price { get; set; }
     public string AuthorName { get; set; }
