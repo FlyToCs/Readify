@@ -4,7 +4,7 @@ using Readify.Domain.BookAgg.Entities;
 
 namespace Readify.Infrastructure.Configuration;
 
-public class BookImgConfiguration : IEntityTypeConfiguration<BookImg>
+public class BookImgConfigurations : IEntityTypeConfiguration<BookImg>
 {
     public void Configure(EntityTypeBuilder<BookImg> builder)
     {
