@@ -8,6 +8,7 @@ using Readify.Infrastructure.Persistence;
 using Readify.Infrastructure.Repository;
 using Readify.Services;
 using Readify.Services.FileAgg.Service;
+using Readify.UI_MVC.CustomMiddlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,8 @@ builder.Services.AddScoped<IBookImgRepository, BookImgRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<RequestTimingMiddleware>();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
