@@ -7,7 +7,7 @@ namespace Readify.Infrastructure.Repository;
 
 public class BookImgRepository(AppDbContext context): IBookImgRepository
 {
-    public void Create(string imgUrl, bool isMainImg, int bookId)
+    public int Create(string imgUrl, bool isMainImg, int bookId)
     {
         var img = new BookImg()
         {
@@ -16,6 +16,6 @@ public class BookImgRepository(AppDbContext context): IBookImgRepository
             BookId = bookId
         };
         context.Add(img);
-        context.SaveChanges();
+        return context.SaveChanges();
     }
 }

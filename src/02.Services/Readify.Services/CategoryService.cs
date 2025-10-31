@@ -9,6 +9,7 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
 {
     public void Create(string name, string description)
     {
+
         categoryRepository.Create(name, description);
     }
 

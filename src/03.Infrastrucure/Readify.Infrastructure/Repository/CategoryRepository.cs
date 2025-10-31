@@ -9,7 +9,7 @@ namespace Readify.Infrastructure.Repository;
 
 public class CategoryRepository(AppDbContext context) : ICategoryRepository
 {
-    public void Create(string name, string description)
+    public int Create(string name, string description)
     {
         var category = new Category()
         {
@@ -18,6 +18,7 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
         };
         context.Add(category);
         context.SaveChanges();
+        return category.Id;
     }
 
     public List<GetCategoryDto> GetPopularCategories(int count)

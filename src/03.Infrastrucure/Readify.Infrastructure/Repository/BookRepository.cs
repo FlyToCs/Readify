@@ -72,7 +72,6 @@ public class BookRepository(AppDbContext context) : IBookRepository
             Price = b.Price,
             AuthorName = b.AuthorName,
             BookName = b.Name
-
         }).FirstOrDefault();
     }
 }
