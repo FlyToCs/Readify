@@ -36,7 +36,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseMiddleware<RequestTimingMiddleware>();
+//app.UseMiddleware<RequestTimingMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {

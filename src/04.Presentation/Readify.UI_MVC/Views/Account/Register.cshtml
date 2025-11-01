@@ -31,10 +31,10 @@
 
                         <div class="col-12 mb-3">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                                <label for="email">ایمیل</label>
+                                <input type="text" class="form-control" asp-for="UserName" placeholder="ali20" required>
+                                <label asp-for="UserName">نام کاربری</label>
                             </div>
-                            <div class="form-text mt-1">از یک ایمیل معتبر استفاده کنید.</div>
+                            
                         </div>
 
                         <div class="col-12 col-md-6 mb-5">
@@ -67,8 +67,8 @@
                         <div class="col-12 col-md-6">
                             <div class="form-floating">
                                 <div class="mb-3">
-                                    <label asp-for="ImgUrl" class="form-label">تصویر پروفایل</label>
-                                    <input class="form-control form-control-sm" asp-for="ImgUrl" type="file">
+                                    <label asp-for="ImgFile" class="form-label">تصویر پروفایل</label>
+                                    <input class="form-control form-control-sm" asp-for="ImgFile" type="file">
                                 </div>
 
                             </div>

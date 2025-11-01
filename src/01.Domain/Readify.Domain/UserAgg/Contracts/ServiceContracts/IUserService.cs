@@ -7,6 +7,7 @@ namespace Readify.Domain.UserAgg.Contracts.ServiceContracts;
 public interface IUserService
 {
     Result<bool> Create(CreateUserDto createUserDto);
+    Result<UserDto> Login(string userName, string password);
     Result<int> Delete(int userId);
     Result<bool> Update(int userId, CreateUserDto newUserInfo);
     Result<bool> UpdateStatus(int userId, bool status);

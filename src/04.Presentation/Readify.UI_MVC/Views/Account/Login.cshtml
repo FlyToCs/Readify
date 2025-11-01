@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LoginUserViewModel
 @{
     Layout = "_Layout";
 }
@@ -12,15 +10,15 @@
                 <h2 class="card-title mb-3 text-center">ورود</h2>
                 <p class="text-center text-muted mb-4">با حساب خود وارد شوید</p>
 
-                <form>
+                <form method="post">
                     <div class="mb-3 form-floating">
-                        <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
-                        <label for="loginEmail">ایمیل</label>
+                        <input type="text" class="form-control" asp-for="UserName" placeholder="name@example.com" required>
+                        <label asp-for="UserName">نام کاربری</label>
                     </div>
 
                     <div class="mb-3 form-floating">
-                        <input type="password" class="form-control" id="loginPassword" placeholder="رمز عبور" minlength="8" required>
-                        <label for="loginPassword">رمز عبور</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="رمز عبور" minlength="8" required>
+                        <label asp-for="Password">رمز عبور</label>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-3">

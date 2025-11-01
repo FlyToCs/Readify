@@ -1,18 +1,52 @@
 ﻿using Readify.Domain._common.Entities;
+using Readify.Domain.FileAgg;
 using Readify.Domain.UserAgg.Contracts.RepositoryContracts;
 using Readify.Domain.UserAgg.Contracts.ServiceContracts;
 using Readify.Domain.UserAgg.DTOs;
 
 namespace Readify.Services;
 
-public class UserService(IUserRepository userRepository) : IUserService
+public class UserService(IUserRepository userRepository, IFileService fileService) : IUserService
 
 {
     public Result<bool> Create(CreateUserDto createUserDto)
     {
+        if (createUserDto.ImgFile != null)
+            createUserDto.ImgUrl = fileService.Upload(createUserDto.ImgFile, "Users");
+
         userRepository.Create(createUserDto);
-        return Result<bool>.Success(message:"کابر با موفقیت رجیستر شد");
+
+        return Result<bool>.Success(message: "کاربر با موفقیت ثبت شد");
     }
+
+    public Result<UserDto> Login(string userName, string password)
+    {
+        var user = userRepository.LoginGetByUserName(userName);
+        if (user == null)
+        {
+
+            return Result<UserDto>.Failure(message: "نام کاربری یا رمز عبور اشتباه است");
+        }
+        else
+        {
+            if (user.Password == password)
+            {
+                return Result<UserDto>.Success(message: "", new UserDto()
+                {
+                    Id = user.Id,
+                    FullName = $"{user.FirstName} {user.LastName}",
+                    ImgUrl = user.ImgUrl,
+                    Role = user.Role,
+                    UserName = user.UserName
+                });
+            }
+            else
+            {
+                return Result<UserDto>.Failure(message: "نام کاربری یا رمز عبور اشتباه است");
+            }
+        }
+    }
+
 
     public Result<int> Delete(int userId)
     {

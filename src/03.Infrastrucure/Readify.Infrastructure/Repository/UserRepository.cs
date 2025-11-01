@@ -15,15 +15,17 @@ public class UserRepository(AppDbContext context) : IUserRepository
             FirstName = createUserDto.FirstName,
             LastName = createUserDto.LastName,
             HashedPassword = createUserDto.HashedPassword,
-            ImgUrl = createUserDto.ImgUrl,
+            ImgUrl = createUserDto.ImgUrl, 
             IsActive = false,
             UserName = createUserDto.UserName,
             Role = createUserDto.Role
         };
+
         context.Add(user);
         context.SaveChanges();
         return user.Id;
     }
+
 
     public int Delete(int userId)
     {
@@ -90,6 +92,7 @@ public class UserRepository(AppDbContext context) : IUserRepository
         {
             FirstName = u.FirstName,
             LastName = u.LastName,
+            Password = u.HashedPassword,
             ImgUrl = u.ImgUrl,
             Id = u.Id,
             Role = u.Role,
