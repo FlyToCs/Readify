@@ -3,7 +3,7 @@ using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.BookAgg.DTOs;
 using Readify.Domain.BookAgg.Entities;
 using Readify.Domain.FileAgg;
-using Readify.Services.FileAgg.Service;
+
 using System.Reflection;
 
 namespace Readify.Services;
