@@ -12,48 +12,11 @@
 
 <div class="container">
 
-    <h2 class="section-title">دسته‌بندی‌ها</h2>
+    @await Component.InvokeAsync("Category");
+    
+    @await Component.InvokeAsync("Book");
 
-    <div class="categories">
-        @{
 
-            var colors = new[] { "cat-red", "cat-green", "cat-orange", "cat-blue", "cat-yellow" };
-            int i = 0;
 
-            foreach (var category in Model.Categories)
-            {
-                var colorClass = colors[i]; 
-                i++;
-
-                <div class="category-card @colorClass">
-                    <div class="category-icon">
-                        <img src="@category.ImgUrl" width="50px" alt="@category.Name" />
-                    </div>
-                    <div class="category-title">@category.Name</div>
-                    <div class="category-subtitle">@category.Description</div>
-                </div>
-            }
-        }
-    </div>
-
-    <h2 class="section-title">جدیدترین کتاب‌ها</h2>
-
-    <div class="books">
-        @foreach (var book in Model.Books)
-        {
-            <div class="book-card">
-                <div class="book-image">
-                    <img src="@book.img.ImageUrl"
-                         alt="@book.BookName" width="260" height="280" />
-                </div>
-                <div class="book-info">
-                    <div class="book-title">@book.BookName</div>
-                    <div class="book-author">@book.AuthorName</div>
-                    <div class="book-author">@book.PageCount صفحه</div>
-                    <div class="book-price">@book.Price ت</div>
-                </div>
-            </div>
-        }
-    </div>
 
 </div>
