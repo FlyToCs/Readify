@@ -9,12 +9,13 @@ namespace Readify.Infrastructure.Repository;
 
 public class CategoryRepository(AppDbContext context) : ICategoryRepository
 {
-    public int Create(string name, string description)
+    public int Create(string name, string description, int userId)
     {
         var category = new Category()
         {
             Name = name,
-            Description = description
+            Description = description,
+            UserId = userId
         };
         context.Add(category);
         context.SaveChanges();

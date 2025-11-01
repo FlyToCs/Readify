@@ -7,10 +7,10 @@ namespace Readify.Services;
 
 public class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
-    public void Create(string name, string description)
+    public void Create(string name, string description, int userId)
     {
 
-        categoryRepository.Create(name, description);
+        categoryRepository.Create(name, description, userId);
     }
 
     public List<GetCategoryDto> GetPopularCategories(int count)

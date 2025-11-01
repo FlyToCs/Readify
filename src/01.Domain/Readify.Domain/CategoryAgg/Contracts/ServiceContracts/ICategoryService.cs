@@ -4,7 +4,7 @@ namespace Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 
 public interface ICategoryService
 {
-    void Create(string name, string description);
+    void Create(string name, string description, int userId);
     List<GetCategoryDto> GetPopularCategories(int count);
     List<GetCategoryDto> GetCategories();
 

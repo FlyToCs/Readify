@@ -4,10 +4,11 @@ using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
 using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 using Readify.Domain.FileAgg;
+using Readify.Domain.UserAgg.Contracts.RepositoryContracts;
+using Readify.Domain.UserAgg.Contracts.ServiceContracts;
 using Readify.Infrastructure.Persistence;
 using Readify.Infrastructure.Repository;
 using Readify.Services;
-using Readify.Services.FileAgg.Service;
 using Readify.UI_MVC.CustomMiddlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,11 +24,13 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IFileService, FileService>(); 
 builder.Services.AddScoped<IBookImgService, BookImgService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookImgRepository, BookImgRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();

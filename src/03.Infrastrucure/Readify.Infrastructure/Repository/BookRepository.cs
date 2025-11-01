@@ -16,7 +16,8 @@ public class BookRepository(AppDbContext context) : IBookRepository
             AuthorName = createBookDto.AuthorName,
             CategoryId = createBookDto.CategoryId,
             Price = createBookDto.Price,
-            PageCount = createBookDto.PageCount
+            PageCount = createBookDto.PageCount,
+            UserId = createBookDto.UserId
         };
         context.Add(book);
         context.SaveChanges();

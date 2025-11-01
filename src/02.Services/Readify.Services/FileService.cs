@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Readify.Domain.FileAgg;
 
-namespace Readify.Services.FileAgg.Service
+namespace Readify.Services
 {
     public class FileService : IFileService
     {

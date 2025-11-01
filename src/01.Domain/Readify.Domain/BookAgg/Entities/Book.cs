@@ -1,5 +1,6 @@
 ﻿using Readify.Domain._common.Entities;
 using Readify.Domain.CategoryAgg.Entities;
+using Readify.Domain.UserAgg.Entities;
 
 namespace Readify.Domain.BookAgg.Entities;
 
@@ -14,6 +15,8 @@ public class Book : BaseEntity
 
     public int CategoryId { get; set; }
     public Category Category { get; set; }
-    public List<BookImg> BookImgs { get; set; }
+    public List<BookImg> BookImgs { get; set; } = [];
+    public int UserId { get; set; }
+    public User User { get; set; }
 
 }
