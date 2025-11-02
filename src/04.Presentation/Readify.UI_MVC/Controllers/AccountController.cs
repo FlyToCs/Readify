@@ -28,13 +28,14 @@ namespace Readify.UI_MVC.Controllers
 
             if (result.Data != null)
             {
-                InMemoryDatabase.OnlineUser = new OnlineUser()
+                var currentUser = new OnlineUser()
                 {
                     Username = result.Data.UserName,
                     Id = result.Data.Id,
                     IsActive = result.Data.IsActive,
                     Role = result.Data.Role
                 };
+                InMemoryDatabase.OnlineUser = currentUser;
                 if (result.Data.Role == RoleEnum.Admin)
                     return RedirectToAction("Index", "Account");
             }
