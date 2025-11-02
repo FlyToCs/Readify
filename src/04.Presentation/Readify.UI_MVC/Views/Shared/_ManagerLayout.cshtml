@@ -98,7 +98,12 @@
                                 <div aria-labelledby="dropdownBasic3" class="dropdown-menu dropdown-menu-left">
                                     <div class="arrow_box_right">
                                         <a href="#" class="dropdown-item py-1"><i class="ft-edit ml-2"></i><span>پروفایل من</span></a><a href="chat.html" class="dropdown-item py-1"><i class="ft-message-circle ml-2"></i><span>چت من</span></a><a href="javascript:;" class="dropdown-item py-1"><i class="ft-settings ml-2"></i><span>تنظیمات</span></a>
-                                        <div class="dropdown-divider"></div><a href="javascript:;" class="dropdown-item"><i class="ft-power ml-2"></i><span>خروج</span></a>
+                                        <div class="dropdown-divider"></div><form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="d-none"></form>
+
+                                        <a href="javascript:;" class="dropdown-item py-1" onclick="document.getElementById('logoutForm').submit();">
+                                            <i class="ft-power ml-2"></i><span>خروج</span>
+                                        </a>
+
                                     </div>
                                 </div>
                             </li>

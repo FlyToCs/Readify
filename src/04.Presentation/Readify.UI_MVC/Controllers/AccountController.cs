@@ -82,6 +82,7 @@ namespace Readify.UI_MVC.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

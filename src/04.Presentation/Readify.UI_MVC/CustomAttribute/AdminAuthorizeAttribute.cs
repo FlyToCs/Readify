@@ -7,7 +7,7 @@ namespace Readify.UI_MVC.CustomAttribute
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var userRole = context.HttpContext.Session.GetString("UserRole");
+            var userRole = context.HttpContext.Session.GetString("Role");
             var userId = context.HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
