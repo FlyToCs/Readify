@@ -77,6 +77,11 @@ namespace Readify.UI_MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult UnAuthorization()
+        {
+            return View();
+        }
 
     }
 }

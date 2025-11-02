@@ -5,6 +5,7 @@ using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 using Readify.Infrastructure.Repository;
 using Readify.UI_MVC.Models;
 using System.Runtime.InteropServices.JavaScript;
+using Readify.UI_MVC.Database;
 
 namespace Readify.UI_MVC.Controllers
 {
@@ -25,8 +26,13 @@ namespace Readify.UI_MVC.Controllers
         [HttpPost]
         public IActionResult Create(CreateBookDto createBook)
         {
-            bookService.Create(createBook);
-            return RedirectToAction("Index");
+            if (InMemoryDatabase.OnlineUser != null)
+            {
+                createBook.UserId = InMemoryDatabase.OnlineUser.Id;
+                bookService.Create(createBook);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("UnAuthorization", "Account");
         }
 
         [HttpPost]

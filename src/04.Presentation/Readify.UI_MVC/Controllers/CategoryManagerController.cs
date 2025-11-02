@@ -11,6 +11,12 @@ namespace Readify.UI_MVC.Controllers
             return View(categoryList);
         }
 
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         public IActionResult Edit()
         {
             return View();

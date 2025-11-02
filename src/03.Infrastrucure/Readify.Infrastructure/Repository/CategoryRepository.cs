@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
 using Readify.Domain.CategoryAgg.DTOs;
@@ -9,17 +10,18 @@ namespace Readify.Infrastructure.Repository;
 
 public class CategoryRepository(AppDbContext context) : ICategoryRepository
 {
-    public int Create(string name, string description, int userId)
+    public bool Create(string name, string description,string imgUrl, int userId)
     {
         var category = new Category()
         {
             Name = name,
             Description = description,
-            UserId = userId
+            UserId = userId,
+            ImgUrl = imgUrl
         };
         context.Add(category);
         context.SaveChanges();
-        return category.Id;
+        return true;
     }
 
     public List<GetCategoryDto> GetPopularCategories(int count)
@@ -50,5 +52,21 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
             .ToList();
     }
 
+    public bool Delete(int categoryId)
+    {
+        var effectiveRows = context.Categories.Where(c => c.Id == categoryId).ExecuteDelete();
+        return effectiveRows > 0;
+    }
 
+    public bool Update(int categoryId, CreateCategoryDto newCategory)
+    {
+        var effectiveRows =  context.Categories.Where(c => c.Id == categoryId)
+            .ExecuteUpdate(setter => setter
+                .SetProperty(c => c.Name, newCategory.Name)
+                .SetProperty(c=>c.Description, newCategory.Descerption)
+                .SetProperty(c=>c.ImgUrl,newCategory.ImgUrl)
+                .SetProperty(c=>c.UserId,newCategory.UserId)
+            );
+        return effectiveRows > 0;
+    }
 }

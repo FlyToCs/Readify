@@ -10,5 +10,7 @@ namespace Readify.UI_MVC.Controllers
             var users = userService.GetAll();
             return View(users.Data);
         }
+
+
     }
 }

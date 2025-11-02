@@ -1,11 +1,15 @@
-﻿using Readify.Domain.CategoryAgg.DTOs;
+﻿using Microsoft.AspNetCore.Http;
+using Readify.Domain._common.Entities;
+using Readify.Domain.CategoryAgg.DTOs;
 
 namespace Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 
 public interface ICategoryService
 {
-    void Create(string name, string description, int userId);
+    Result<bool> Create(CreateCategoryDto createCategoryDto);
     List<GetCategoryDto> GetPopularCategories(int count);
     List<GetCategoryDto> GetCategories();
+    bool Delete(int categoryId);
+    bool Update(int categoryId, CreateCategoryDto newCategory);
 
 }
