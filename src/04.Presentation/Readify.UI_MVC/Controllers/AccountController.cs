@@ -2,7 +2,7 @@
 using Readify.Domain.UserAgg.Contracts.ServiceContracts;
 using Readify.Domain.UserAgg.DTOs;
 using Readify.Domain.UserAgg.Enums;
-using Readify.UI_MVC.Database;
+
 using Readify.UI_MVC.Models;
 
 namespace Readify.UI_MVC.Controllers
@@ -20,35 +20,33 @@ namespace Readify.UI_MVC.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult Login(LoginUserViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Error = "Please enter valid data.";
+                return View(model);
+            }
+
             var result = userService.Login(model.UserName, model.Password);
 
-            if (result.Data != null)
+            if (!result.IsSuccess || result.Data == null)
             {
-                var currentUser = new OnlineUser()
-                {
-                    Username = result.Data.UserName,
-                    Id = result.Data.Id,
-                    IsActive = result.Data.IsActive,
-                    Role = result.Data.Role
-                };
-                InMemoryDatabase.OnlineUser = currentUser;
-                if (result.Data.Role == RoleEnum.Admin)
-                    return RedirectToAction("Index", "Account");
+                ViewBag.Error = result.Message ?? "Invalid username or password.";
+                return View(model);
             }
 
-            if (!result.IsSuccess)
-            {
-                ViewBag.Error = result.Message; 
-                return View(model); 
-            }
+            HttpContext.Session.SetInt32("UserId", result.Data.Id);
+            HttpContext.Session.SetString("Username", result.Data.UserName);
+            HttpContext.Session.SetString("Role", result.Data.Role.ToString());
+            HttpContext.Session.SetString("IsActive", result.Data.IsActive.ToString());
+
+            if (result.Data.Role == RoleEnum.Admin)
+                return RedirectToAction("Index", "BookManager");
 
             return RedirectToAction("Index", "Home");
         }
-
 
 
         [HttpGet]
@@ -79,9 +77,15 @@ namespace Readify.UI_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult UnAuthorization()
+        public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }

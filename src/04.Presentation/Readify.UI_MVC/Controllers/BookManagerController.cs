@@ -3,20 +3,22 @@ using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.BookAgg.DTOs;
 using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 using Readify.Infrastructure.Repository;
+using Readify.UI_MVC.CustomAttribute;
+
 using Readify.UI_MVC.Models;
 using System.Runtime.InteropServices.JavaScript;
-using Readify.UI_MVC.Database;
 
 namespace Readify.UI_MVC.Controllers
 {
     public class BookManagerController(IBookService bookService , ICategoryService categoryService) : Controller
     {
+        [AdminAuthorize]
         public IActionResult Index()
         {
             var bookList = bookService.GetBooks();
             return View(bookList);
         }
-
+        [AdminAuthorize]
         public IActionResult Create()
         {
             var categories = categoryService.GetCategories();
@@ -24,24 +26,23 @@ namespace Readify.UI_MVC.Controllers
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public IActionResult Create(CreateBookDto createBook)
         {
-            if (InMemoryDatabase.OnlineUser != null)
-            {
-                createBook.UserId = InMemoryDatabase.OnlineUser.Id;
+                createBook.UserId = HttpContext.Session.GetInt32("UserId")!.Value; 
                 bookService.Create(createBook);
                 return RedirectToAction("Index");
-            }
-            return RedirectToAction("UnAuthorization", "Account");
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public IActionResult Delete(int id)
         {
             bookService.Delete(id);
             return RedirectToAction("Index");
         }
 
+        [AdminAuthorize]
         public IActionResult Edit(int id)
         {
             var book = bookService.GetBookById(id);
