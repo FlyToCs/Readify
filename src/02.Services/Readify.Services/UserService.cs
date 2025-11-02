@@ -3,6 +3,8 @@ using Readify.Domain.FileAgg;
 using Readify.Domain.UserAgg.Contracts.RepositoryContracts;
 using Readify.Domain.UserAgg.Contracts.ServiceContracts;
 using Readify.Domain.UserAgg.DTOs;
+using Readify.Framework;
+using System.Text.RegularExpressions;
 
 namespace Readify.Services;
 
@@ -11,41 +13,72 @@ public class UserService(IUserRepository userRepository, IFileService fileServic
 {
     public Result<bool> Create(CreateUserDto createUserDto)
     {
+       
+        if (string.IsNullOrWhiteSpace(createUserDto.FirstName) ||
+            string.IsNullOrWhiteSpace(createUserDto.LastName) ||
+            string.IsNullOrWhiteSpace(createUserDto.UserName) ||
+            string.IsNullOrWhiteSpace(createUserDto.Password))
+            return Result<bool>.Failure("تمام فیلدهای ضروری باید پر شوند.");
+
+        if (createUserDto.UserName.Length < 4)
+            return Result<bool>.Failure("نام کاربری باید حداقل ۴ کاراکتر باشد.");
+
+        if (createUserDto.Password.Length < 8)
+            return Result<bool>.Failure("رمز عبور باید حداقل ۸ کاراکتر باشد.");
+
+
+        createUserDto.UserName = createUserDto.UserName.Trim().ToLower();
+        createUserDto.FirstName = createUserDto.FirstName.Trim();
+        createUserDto.LastName = createUserDto.LastName.Trim();
+
+
+        if (userRepository.IsUsernameExist(createUserDto.UserName))
+            return Result<bool>.Failure("نام کاربری قبلاً ثبت شده است.");
+
+        
         if (createUserDto.ImgFile != null)
             createUserDto.ImgUrl = fileService.Upload(createUserDto.ImgFile, "Users");
+        else
+            createUserDto.ImgUrl = "/Files/Users/default-profile.jpg";
+
+    
+        createUserDto.Password = PasswordHasherSha256.HashPassword(createUserDto.Password);
 
         userRepository.Create(createUserDto);
 
         return Result<bool>.Success(message: "کاربر با موفقیت ثبت شد");
     }
 
+
     public Result<UserDto> Login(string userName, string password)
     {
-        var user = userRepository.LoginGetByUserName(userName);
-        if (user == null)
-        {
+        if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            return Result<UserDto>.Failure("نام کاربری و رمز عبور الزامی است.");
 
-            return Result<UserDto>.Failure(message: "نام کاربری یا رمز عبور اشتباه است");
-        }
-        else
+        userName = userName.Trim().ToLower();
+        var user = userRepository.LoginGetByUserName(userName);
+
+        if (user == null)
+            return Result<UserDto>.Failure("نام کاربری یا رمز عبور اشتباه است.");
+
+        if (!PasswordHasherSha256.VerifyPassword(password, user.Password))
+            return Result<UserDto>.Failure("نام کاربری یا رمز عبور اشتباه است.");
+
+        if (!user.IsActive)
+            return Result<UserDto>.Failure("کاربر فعال نیست.");
+
+        var userDto = new UserDto
         {
-            if (user.Password == password)
-            {
-                return Result<UserDto>.Success(message: "", new UserDto()
-                {
-                    Id = user.Id,
-                    FullName = $"{user.FirstName} {user.LastName}",
-                    ImgUrl = user.ImgUrl,
-                    Role = user.Role,
-                    UserName = user.UserName
-                });
-            }
-            else
-            {
-                return Result<UserDto>.Failure(message: "نام کاربری یا رمز عبور اشتباه است");
-            }
-        }
+            Id = user.Id,
+            FullName = $"{user.FirstName} {user.LastName}",
+            ImgUrl = user.ImgUrl,
+            Role = user.Role,
+            UserName = user.UserName
+        };
+
+        return Result<UserDto>.Success("ورود با موفقیت انجام شد", userDto);
     }
+
 
 
     public Result<int> Delete(int userId)

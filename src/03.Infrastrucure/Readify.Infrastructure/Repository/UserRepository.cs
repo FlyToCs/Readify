@@ -14,7 +14,7 @@ public class UserRepository(AppDbContext context) : IUserRepository
         {
             FirstName = createUserDto.FirstName,
             LastName = createUserDto.LastName,
-            HashedPassword = createUserDto.HashedPassword,
+            HashedPassword = createUserDto.Password,
             ImgUrl = createUserDto.ImgUrl, 
             IsActive = false,
             UserName = createUserDto.UserName,
@@ -41,7 +41,7 @@ public class UserRepository(AppDbContext context) : IUserRepository
                 .SetProperty(u => u.FirstName, newUserInfo.FirstName)
                 .SetProperty(u => u.LastName, newUserInfo.LastName)
                 .SetProperty(u => u.UserName, newUserInfo.UserName)
-                .SetProperty(u => u.HashedPassword, newUserInfo.HashedPassword)
+                .SetProperty(u => u.HashedPassword, newUserInfo.Password)
                 .SetProperty(u => u.ImgUrl, newUserInfo.ImgUrl)
                 .SetProperty(u => u.Role, newUserInfo.Role)
             );
@@ -70,7 +70,8 @@ public class UserRepository(AppDbContext context) : IUserRepository
             Id = u.Id,
             Role = u.Role,
             UserName = u.UserName,
-            ImgUrl = u.ImgUrl
+            ImgUrl = u.ImgUrl,
+            IsActive = u.IsActive
         }).ToList();
     }
 
@@ -82,7 +83,8 @@ public class UserRepository(AppDbContext context) : IUserRepository
             Id = u.Id,
             Role = u.Role,
             UserName = u.UserName,
-            ImgUrl = u.ImgUrl
+            ImgUrl = u.ImgUrl,
+            IsActive = u.IsActive
         }).FirstOrDefault();
     }
 
@@ -96,7 +98,8 @@ public class UserRepository(AppDbContext context) : IUserRepository
             ImgUrl = u.ImgUrl,
             Id = u.Id,
             Role = u.Role,
-            UserName = u.UserName
+            UserName = u.UserName,
+            IsActive = u.IsActive
         }).FirstOrDefault();
     }
 

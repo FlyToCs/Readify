@@ -12,5 +12,6 @@ namespace Readify.Domain.UserAgg.DTOs
         public RoleEnum Role { get; set; }
         public string UserName { get; set; }
         public string ImgUrl { get; set; }
+        public bool IsActive { get; set; }
     }
 }

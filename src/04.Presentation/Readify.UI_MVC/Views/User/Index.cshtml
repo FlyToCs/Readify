@@ -1,0 +1,70 @@
+﻿@model List<Readify.Domain.UserAgg.DTOs.UserDto>
+
+@{
+    ViewBag.Title = "مدیریت کاربران";
+    Layout = "_ManagerLayout";
+}
+
+
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title">لیست کتاب ها</h4>
+                        <a class="btn mr-1 btn-round btn-primary" asp-controller="BookManager" asp-action="Create">افزودن</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>تصویر</th>
+                                    <th>نام</th>
+                                    <th>نام کاربری</th>
+                                    <th>نقش</th>
+                                    <th>وضعیت</th>
+                                    <th>اقدامات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@user.Id</td>
+                                            <td><img src="@user.ImgUrl" width="50px" height="50px" class="rounded-circle" /></td>
+                                            <td>@user.FullName</td>
+                                            <td>@user.UserName</td>
+                                            <td>@user.Role</td>
+                                            <td>@user.IsActive</td>
+
+                                            <td>
+                                                <form asp-controller="" asp-action="" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="id" value="@user.Id" />
+                                                    <button type="submit" class="btn-info btn p-1" title="ویرایش">
+                                                        ویرایش
+                                                    </button>
+                                                </form>
+                                                <form asp-controller="" asp-action="" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="id" value="@user.Id" />
+                                                    <button type="submit" class="btn-danger btn p-1" title="حذف">
+                                                        حذف
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -8,6 +8,11 @@ namespace Readify.UI_MVC.Controllers
 {
     public class AccountController(IUserService userService) : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -18,21 +23,20 @@ namespace Readify.UI_MVC.Controllers
         [HttpPost]
         public IActionResult Login(LoginUserViewModel model)
         {
-            var user = userService.Login(model.UserName, model.Password);
-            if (user.Data == null)
+            var result = userService.Login(model.UserName, model.Password);
+
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Error", "Home");
+                ViewBag.Error = result.Message; 
+                return View(model); 
             }
-            else if (user.Data.Role == RoleEnum.Admin)
-            {
-                return RedirectToAction("Index", "BookManager");
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            
+
+            if (result.Data.Role == RoleEnum.Admin)
+                return RedirectToAction("Index", "Account");
+
+            return RedirectToAction("Index", "Home");
         }
+
 
 
         [HttpGet]
@@ -41,19 +45,43 @@ namespace Readify.UI_MVC.Controllers
             return View();
         }
 
+        // [HttpPost]
+        // public IActionResult Register(CreateUserDto model)
+        // {
+        //     userService.Create(model);
+        //
+        //     if (model.Role == RoleEnum.Admin)
+        //     {
+        //         return RedirectToAction("Index", "BookManager");
+        //     }
+        //     else
+        //     {
+        //         return RedirectToAction("Index", "Home");
+        //     }
+        // }
+
+
+
+        [HttpPost]
         public IActionResult Register(CreateUserDto model)
         {
-            userService.Create(model);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = userService.Create(model);
+
+            if (!result.IsSuccess)
+            {
+                ViewBag.Error = result.Message;
+                return View(model);
+            }
 
             if (model.Role == RoleEnum.Admin)
-            {
                 return RedirectToAction("Index", "BookManager");
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+
+            return RedirectToAction("Index", "Home");
         }
+
 
     }
 }

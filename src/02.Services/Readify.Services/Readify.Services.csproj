@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\00.Framework\Readify.Framework\Readify.Framework.csproj" />
     <ProjectReference Include="..\..\01.Domain\Readify.Domain\Readify.Domain.csproj" />
   </ItemGroup>
 

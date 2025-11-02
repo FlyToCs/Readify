@@ -1,4 +1,5 @@
-﻿using Readify.Domain.UserAgg.Enums;
+﻿using System.Security.AccessControl;
+using Readify.Domain.UserAgg.Enums;
 
 namespace Readify.Domain.UserAgg.DTOs;
 
@@ -11,5 +12,6 @@ public class UserLoginDto
     public string Password { get; set; }
     public string ImgUrl { get; set; }
     public RoleEnum Role { get; set; }
+    public bool IsActive { get; set; }
     
 }
