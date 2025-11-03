@@ -9,5 +9,6 @@ public interface IBookRepository
     List<GetBookDto> GetBooks();
     void Delete(int bookId);
     GetBookDto? GetBookById(int id);
+    bool Update(int bookId, UpdateBookDto bookInfo);
 
 }

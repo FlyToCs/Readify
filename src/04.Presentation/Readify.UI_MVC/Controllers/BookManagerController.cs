@@ -42,29 +42,54 @@ namespace Readify.UI_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
         [AdminAuthorize]
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var book = bookService.GetBookById(id);
-            if (book == null) return NotFound();
+            if (book == null)
+                return NotFound();
 
             var viewModel = new BookEditViewModel
             {
-                Book = new GetBookDto()
+                Book = new UpdateBookDto
                 {
-                    Id = book.Id,
+                    BookId = book.Id,
+                    CategoryId = book.CategoryId,
+                    ImgUrl = book.img?.ImageUrl, 
                     BookName = book.BookName,
-                    AuthorName = book.AuthorName,
                     Price = book.Price,
+                    AuthorName = book.AuthorName,
                     PageCount = book.PageCount,
-                    img = book.img
-                    
+                    UserId = HttpContext.Session.GetInt32("UserId")!.Value
                 },
                 Categories = categoryService.GetCategories()
             };
 
             return View(viewModel);
         }
+
+
+        [HttpPost]
+        [AdminAuthorize]
+        public IActionResult Edit(int id, BookEditViewModel model)
+        {
+
+
+            var result = bookService.Update(id, model.Book);
+
+            if (!result.IsSuccess)
+            {
+                ViewBag.Error = result.Message;
+                model.Categories = categoryService.GetCategories(); 
+                return View(model);
+            }
+
+            ViewBag.Error = result.Message;
+            return RedirectToAction("Index");
+        }
+
 
 
     }

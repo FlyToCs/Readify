@@ -64,7 +64,9 @@ public class BookRepository(AppDbContext context) : IBookRepository
 
     public GetBookDto? GetBookById(int id)
     {
-        return context.Books.Where(b => b.Id == id).Select(b => new GetBookDto()
+        return context.Books.Where(b => b.Id == id)
+            .Include(b=>b.BookImgs)
+            .Select(b => new GetBookDto()
         {
             Id = b.Id,
             CategoryId = b.CategoryId,
@@ -75,4 +77,18 @@ public class BookRepository(AppDbContext context) : IBookRepository
             BookName = b.Name
         }).FirstOrDefault();
     }
+
+    public bool Update(int bookId, UpdateBookDto bookInfo)
+    {
+        var effectiveRows = context.Books.Where(b => b.Id == bookId).ExecuteUpdate(setter => setter
+            .SetProperty(b=>b.UserId, bookInfo.UserId)
+            .SetProperty(b=>b.AuthorName, bookInfo.AuthorName)
+            .SetProperty(b=>b.CategoryId, bookInfo.CategoryId)
+            .SetProperty(b=>b.Name, bookInfo.BookName)
+            .SetProperty(b=>b.PageCount,bookInfo.PageCount)
+            .SetProperty(b=>b.Price, bookInfo.Price)
+        );
+        return effectiveRows > 0;
+    }
+
 }

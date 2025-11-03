@@ -5,7 +5,7 @@ namespace Readify.UI_MVC.Models
 {
     public class BookEditViewModel
     {
-        public GetBookDto Book { get; set; }     
+        public UpdateBookDto Book { get; set; }     
         public List<GetCategoryDto> Categories { get; set; }  
     }
 }

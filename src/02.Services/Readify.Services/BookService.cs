@@ -1,4 +1,5 @@
-﻿using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
+﻿using Readify.Domain._common.Entities;
+using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.BookAgg.DTOs;
 using Readify.Domain.BookAgg.Entities;
@@ -43,4 +44,39 @@ public class BookService(IBookRepository bookRepository,IBookImgService bookImgS
     {
         return bookRepository.GetBookById(id);
     }
+
+
+    public Result<bool> Update(int bookId, UpdateBookDto bookInfo)
+    {
+        var existingBook = bookRepository.GetBookById(bookId);
+        if (existingBook == null)
+            return Result<bool>.Failure("کتاب مورد نظر پیدا نشد.");
+
+        if (bookInfo.ImgFile != null)
+        {
+            if (!string.IsNullOrEmpty(existingBook.img.ImageUrl))
+                bookImgService.DeleteMainImg(existingBook.img.ImageUrl, bookId);
+
+            var fileUrl = fileService.Upload(bookInfo.ImgFile, "Books");
+            bookImgService.Create(fileUrl, true, bookId);
+            bookInfo.ImgUrl = fileUrl;
+        }
+        else
+        {
+            bookInfo.ImgUrl = existingBook.img.ImageUrl;
+
+            if (string.IsNullOrEmpty(bookInfo.ImgUrl))
+                return Result<bool>.Failure("کتاب باید حداقل یک عکس داشته باشد.");
+        }
+
+        var updateResult = bookRepository.Update(bookId, bookInfo);
+        if (!updateResult)
+            return Result<bool>.Failure("ویرایش کتاب با خطا مواجه شد.");
+
+        return Result<bool>.Success("کتاب با موفقیت ویرایش شد.", true);
+    }
+
+
+
+
 }

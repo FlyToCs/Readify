@@ -14,27 +14,29 @@
 
 
                     <form method="post" enctype="multipart/form-data">
+                        
+                        <input type="hidden" asp-for="Book.BookId" />
+                        <input type="hidden" asp-for="Book.UserId" />
 
-                        <input type="hidden" name="Book.Id" value="@Model.Book.Id" />
 
                         <div class="form-group">
-                            <label>نام کتاب:</label>
-                            <input type="text" name="Book.BookName" class="form-control" value="@Model.Book.BookName" />
+                            <label asp-for="Book.BookName">نام کتاب:</label>
+                            <input type="text" asp-for="Book.BookName" class="form-control" value="@Model.Book.BookName" />
                         </div>
 
                         <div class="form-group">
-                            <label>نویسنده:</label>
-                            <input type="text" name="Book.AuthorName" class="form-control" value="@Model.Book.AuthorName" />
+                            <label asp-for="Book.AuthorName">نویسنده:</label>
+                            <input type="text" asp-for="Book.AuthorName" class="form-control" value="@Model.Book.AuthorName" />
                         </div>
 
                         <div class="form-group">
-                            <label>تعداد صفحات:</label>
-                            <input type="number" name="Book.PageCount" class="form-control" value="@Model.Book.PageCount" />
+                            <label asp-for="Book.PageCount">تعداد صفحات:</label>
+                            <input type="number" asp-for="Book.PageCount" class="form-control" value="@Model.Book.PageCount" />
                         </div>
 
                         <div class="form-group">
-                            <label>قیمت:</label>
-                            <input type="number" name="Book.Price" class="form-control" value="@Model.Book.Price" />
+                            <label asp-for="Book.Price">قیمت:</label>
+                            <input type="number" asp-for="Book.Price" class="form-control" value="@Model.Book.Price" />
                         </div>
 
                         <div class="form-group">
@@ -45,31 +47,36 @@
                                 {
                                     if (category.Id == Model.Book.CategoryId)
                                     {
-                                        <option value="@category.Name" selected>@category.Name</option>
+                                        <option value="@category.Id" selected>@category.Name</option>
                                     }
                                     else
                                     {
-                                        <option value="@category.Name">@category.Name</option>
+                                        <option value="@category.Id">@category.Name</option>
                                     }
                                 }
                             </select>
-
-
                         </div>
 
+
                         <div class="form-group">
-                            <label>تصویر اصلی:</label>
-                            @if (Model.Book.img != null && !string.IsNullOrEmpty(Model.Book.img.ImageUrl))
+                            <label asp-for="Book.ImgFile">تصویر اصلی:</label>
+                            @if (!string.IsNullOrEmpty(Model.Book.ImgUrl))
                             {
-                                <div>
-                                    <img src="/@Model.Book.img.ImageUrl" width="150" />
+                                <div class="mb-2">
+                                    <img src="~/@Model.Book.ImgUrl"  width="150" style="border-radius:8px" />
                                 </div>
                             }
 
-                            <input type="file" name="Book.ImageFile" class="form-control-file" />
+                            <input type="file" asp-for="Book.ImgFile" class="form-control-file" />
                         </div>
 
                         <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
+                        <div class="d-grid mb-2">
+                       
+                        
+                            <div style="color:red">@ViewBag.Error</div>
+
+                        </div>
                     </form>
 
                 </div>
