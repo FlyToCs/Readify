@@ -13,7 +13,7 @@ public class User : BaseEntity
     public string UserName { get; set; }
     public string HashedPassword { get; set; }
     public RoleEnum Role { get; set; }
-    public string ImgUrl { get; set; }
+    public string? ImgUrl { get; set; }
     public bool IsActive { get; set; }
     public List<Book> Books { get; set; } = [];
     public List<Category> Categories { get; set; } = [];

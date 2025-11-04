@@ -2,6 +2,7 @@
 using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.FileAgg;
 using System.Reflection;
+using Readify.Domain.BookAgg.DTOs;
 
 namespace Readify.Services;
 
@@ -20,5 +21,7 @@ public class BookImgService(IBookImgRepository bookImgRepository, IFileService f
         fileService.Delete(imgUrl);
         return bookImgRepository.DeleteMainImg(imgUrl, bookId);
     }
+
+
 
 }

@@ -77,6 +77,41 @@ public class BookRepository(AppDbContext context) : IBookRepository
             BookName = b.Name
         }).FirstOrDefault();
     }
+    public GetBookWithImgsDto? GetBookWithImgsById(int id)
+    {
+        return context.Books
+            .Where(b => b.Id == id)
+            .Include(b => b.BookImgs)
+            .Select(b => new GetBookWithImgsDto
+            {
+                Id = b.Id,
+                CategoryId = b.CategoryId,
+                PageCount = b.PageCount,
+                Price = b.Price,
+                AuthorName = b.AuthorName,
+                BookName = b.Name,
+                Imgs = b.BookImgs.Select(img => new BookImgDto
+                {
+                    Id = img.Id,
+                    ImgUrl = img.ImageUrl,
+                    IsMainImg = img.IsMainImg
+                }).ToList()
+            })
+            .FirstOrDefault();
+    }
+    public List<BookImgDto> GetBookImgsByBookId(int bookId)
+    {
+        return context.BookImgs
+            .Where(img => img.BookId == bookId)
+            .Select(img => new BookImgDto
+            {
+                Id = img.Id,
+                ImgUrl = img.ImageUrl,
+                IsMainImg = img.IsMainImg
+            })
+            .ToList();
+    }
+
 
     public bool Update(int bookId, UpdateBookDto bookInfo)
     {

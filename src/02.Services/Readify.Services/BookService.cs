@@ -37,8 +37,14 @@ public class BookService(IBookRepository bookRepository,IBookImgService bookImgS
 
     public void Delete(int bookId)
     {
+        var bookImgs = bookRepository.GetBookImgsByBookId(bookId);
+        foreach (var img in bookImgs)
+        {
+            fileService.Delete(img.ImgUrl);
+        }
         bookRepository.Delete(bookId);
     }
+
 
     public GetBookDto GetBookById(int id)
     {

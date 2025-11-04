@@ -35,4 +35,11 @@ public class BookImgRepository(AppDbContext context): IBookImgRepository
     {
         return context.BookImgs.FirstOrDefault(i => i.BookId == bookId && i.IsMainImg)?.ImageUrl;
     }
+
+    public bool DeleteImgs(int bookId)
+    {
+        var effectiveRows = context.BookImgs.Where(i => i.BookId == bookId)
+            .ExecuteDelete();
+        return effectiveRows > 0;
+    }
 }

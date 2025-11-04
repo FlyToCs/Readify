@@ -10,5 +10,6 @@ public interface IBookRepository
     void Delete(int bookId);
     GetBookDto? GetBookById(int id);
     bool Update(int bookId, UpdateBookDto bookInfo);
-
+    GetBookWithImgsDto? GetBookWithImgsById(int id);
+    List<BookImgDto> GetBookImgsByBookId(int bookId);
 }

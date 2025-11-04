@@ -10,7 +10,7 @@ public class UserLoginDto
     public string LastName { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
-    public string ImgUrl { get; set; }
+    public string? ImgUrl { get; set; }
     public RoleEnum Role { get; set; }
     public bool IsActive { get; set; }
     

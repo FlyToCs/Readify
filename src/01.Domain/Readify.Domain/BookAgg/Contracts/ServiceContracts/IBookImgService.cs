@@ -1,4 +1,6 @@
-﻿namespace Readify.Domain.BookAgg.Contracts.ServiceContracts;
+﻿using Readify.Domain.BookAgg.DTOs;
+
+namespace Readify.Domain.BookAgg.Contracts.ServiceContracts;
 
 public interface IBookImgService
 {
