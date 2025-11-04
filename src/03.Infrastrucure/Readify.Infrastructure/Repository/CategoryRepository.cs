@@ -52,6 +52,23 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
             .ToList();
     }
 
+    public GetCategoryDto? GetById(int categoryId)
+    {
+        return context.Categories.Where(c => c.Id == categoryId)
+            .Select(c => new GetCategoryDto()
+        {
+            Id = c.Id,
+            Description = c.Description,
+            Name = c.Name,
+            ImgUrl = c.ImgUrl
+        }).FirstOrDefault();
+    }
+
+    public string? ImgUrl(int categoryId)
+    {
+        return context.Categories.Where(c => c.Id == categoryId).Select(c => c.ImgUrl).FirstOrDefault();
+    }
+
     public bool Delete(int categoryId)
     {
         var effectiveRows = context.Categories.Where(c => c.Id == categoryId).ExecuteDelete();

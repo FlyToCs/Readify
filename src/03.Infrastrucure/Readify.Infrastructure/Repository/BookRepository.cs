@@ -70,7 +70,7 @@ public class BookRepository(AppDbContext context) : IBookRepository
         {
             Id = b.Id,
             CategoryId = b.CategoryId,
-            img = b.BookImgs.FirstOrDefault(i=>i.IsMainImg),
+            img = b.BookImgs.FirstOrDefault(i=>i.IsMainImg)!,
             PageCount = b.PageCount,
             Price = b.Price,
             AuthorName = b.AuthorName,

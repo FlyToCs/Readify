@@ -43,11 +43,29 @@ public class CategoryService(ICategoryRepository categoryRepository, IFileServic
 
     public bool Delete(int categoryId)
     {
+        var img = categoryRepository.ImgUrl(categoryId);
+        if (img != null)
+        {
+            fileService.Delete(img);
+        }
+
         return categoryRepository.Delete(categoryId);
     }
 
-    public bool Update(int categoryId, CreateCategoryDto newCategory)
+    public Result<bool> Update(int categoryId, CreateCategoryDto newCategory)
     {
-        return categoryRepository.Update(categoryId, newCategory);
+        var category = categoryRepository.GetById(categoryId);
+        if (category == null)
+            return Result<bool>.Failure(message:"دسته بندی یافت نشد");
+
+        if (newCategory.Name == null! || newCategory.Descerption == null!)
+            return Result<bool>.Failure(message: "نام دسته بندی و توضیحات نمیتواند خالی باشد");
+
+        if (newCategory.ImgFile == null)
+            return Result<bool>.Failure(message: "دسته بندی باید شامل یک تصویر باشد");
+        newCategory.ImgUrl = fileService.Upload(newCategory.ImgFile, "Categories");
+
+        categoryRepository.Update(categoryId, newCategory);
+        return Result<bool>.Success(message: "عمیات با موفقیت انجام شد");
     }
 }

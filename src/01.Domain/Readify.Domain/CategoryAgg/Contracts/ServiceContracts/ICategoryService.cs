@@ -10,6 +10,6 @@ public interface ICategoryService
     List<GetCategoryDto> GetPopularCategories(int count);
     List<GetCategoryDto> GetCategories();
     bool Delete(int categoryId);
-    bool Update(int categoryId, CreateCategoryDto newCategory);
+    Result<bool> Update(int categoryId, CreateCategoryDto newCategory);
 
 }
