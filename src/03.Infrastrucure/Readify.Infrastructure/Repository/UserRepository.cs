@@ -90,7 +90,7 @@ public class UserRepository(AppDbContext context) : IUserRepository
 
     public UserLoginDto? LoginGetByUserName(string username)
     {
-        return context.Users.Select(u => new UserLoginDto()
+        return context.Users.Where(x=>x.UserName == username).Select(u => new UserLoginDto()
         {
             FirstName = u.FirstName,
             LastName = u.LastName,

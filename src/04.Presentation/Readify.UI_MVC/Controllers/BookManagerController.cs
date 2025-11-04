@@ -10,15 +10,16 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace Readify.UI_MVC.Controllers
 {
+    [AdminAuthorize]
     public class BookManagerController(IBookService bookService , ICategoryService categoryService) : Controller
     {
-        [AdminAuthorize]
+        
         public IActionResult Index()
         {
             var bookList = bookService.GetBooks();
             return View(bookList);
         }
-        [AdminAuthorize]
+        
         public IActionResult Create()
         {
             var categories = categoryService.GetCategories();
@@ -26,7 +27,6 @@ namespace Readify.UI_MVC.Controllers
         }
 
         [HttpPost]
-        [AdminAuthorize]
         public IActionResult Create(CreateBookDto createBook)
         {
                 createBook.UserId = HttpContext.Session.GetInt32("UserId")!.Value; 
@@ -35,7 +35,6 @@ namespace Readify.UI_MVC.Controllers
         }
 
         [HttpPost]
-        [AdminAuthorize]
         public IActionResult Delete(int id)
         {
             bookService.Delete(id);
@@ -43,7 +42,7 @@ namespace Readify.UI_MVC.Controllers
         }
 
 
-        [AdminAuthorize]
+        
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -72,7 +71,6 @@ namespace Readify.UI_MVC.Controllers
 
 
         [HttpPost]
-        [AdminAuthorize]
         public IActionResult Edit(int id, BookEditViewModel model)
         {
 

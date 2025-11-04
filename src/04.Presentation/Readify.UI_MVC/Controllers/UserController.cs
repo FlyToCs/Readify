@@ -4,10 +4,10 @@ using Readify.UI_MVC.CustomAttribute;
 
 namespace Readify.UI_MVC.Controllers
 {
+    [AdminAuthorize]
     public class UserController(IUserService userService) : Controller
     {
 
-        [AdminAuthorize]
         public IActionResult Index()
         {
             var users = userService.GetAll();
