@@ -53,8 +53,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseSession();
 
-
-
+app.CustomExceptionHandlingMiddleware();
 app.UseHttpsRedirection();
 app.UseRouting();
 
