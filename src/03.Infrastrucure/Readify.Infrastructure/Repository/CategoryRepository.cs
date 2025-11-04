@@ -82,7 +82,6 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
                 .SetProperty(c => c.Name, newCategory.Name)
                 .SetProperty(c=>c.Description, newCategory.Descerption)
                 .SetProperty(c=>c.ImgUrl,newCategory.ImgUrl)
-                .SetProperty(c=>c.UserId,newCategory.UserId)
             );
         return effectiveRows > 0;
     }

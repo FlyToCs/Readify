@@ -41,6 +41,17 @@ public class CategoryService(ICategoryRepository categoryRepository, IFileServic
         return categoryRepository.GetCategories();
     }
 
+    public Result<GetCategoryDto> GetById(int categoryId)
+    {
+        var category =  categoryRepository.GetById(categoryId);
+        if (category == null)
+        {
+            return Result<GetCategoryDto>.Failure("دسته بندی یافت نشد", null);
+        }
+
+        return Result<GetCategoryDto>.Success("",category);
+    }
+
     public bool Delete(int categoryId)
     {
         var img = categoryRepository.ImgUrl(categoryId);
@@ -56,16 +67,20 @@ public class CategoryService(ICategoryRepository categoryRepository, IFileServic
     {
         var category = categoryRepository.GetById(categoryId);
         if (category == null)
-            return Result<bool>.Failure(message:"دسته بندی یافت نشد");
+            return Result<bool>.Failure(message: "دسته بندی یافت نشد");
 
-        if (newCategory.Name == null! || newCategory.Descerption == null!)
+        if (string.IsNullOrWhiteSpace(newCategory.Name) || string.IsNullOrWhiteSpace(newCategory.Descerption))
             return Result<bool>.Failure(message: "نام دسته بندی و توضیحات نمیتواند خالی باشد");
 
-        if (newCategory.ImgFile == null)
+        if (newCategory.ImgFile == null && string.IsNullOrWhiteSpace(newCategory.ImgUrl))
             return Result<bool>.Failure(message: "دسته بندی باید شامل یک تصویر باشد");
-        newCategory.ImgUrl = fileService.Upload(newCategory.ImgFile, "Categories");
+
+        if (newCategory.ImgFile != null)
+            newCategory.ImgUrl = fileService.Upload(newCategory.ImgFile, "Categories");
 
         categoryRepository.Update(categoryId, newCategory);
-        return Result<bool>.Success(message: "عمیات با موفقیت انجام شد");
+
+        return Result<bool>.Success(message: "عملیات با موفقیت انجام شد");
     }
+
 }

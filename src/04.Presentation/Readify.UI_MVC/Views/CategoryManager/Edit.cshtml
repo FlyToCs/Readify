@@ -1,44 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Readify.Domain.CategoryAgg.DTOs.EditCategoryDto
 @{
     Layout = "_ManagerLayout";
 }
 
-
 <div class="card-body">
-	<div class="px-3">
-		<form class="form">
-			<div class="form-body">
-				<div class="row">
+    <div class="px-3">
+        <form class="form" method="post" enctype="multipart/form-data">
+            <div class="form-body">
+                <div class="row">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ImgUrl" /> 
+
                     <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                         <fieldset class="form-group">
-                            <label for="basicInput">نام دسته بندی</label>
-                            <input type="text" class="form-control" id="basicInput">
+                            <label asp-for="Name">نام دسته بندی</label>
+                            <input type="text" class="form-control" asp-for="Name">
                         </fieldset>
                     </div>
 
-					<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-						<fieldset class="form-group">
-							<label for="helpInputTop">توضیحات</label>
-							<small class="text-muted"><i></i></small>
-							<input type="text" class="form-control" id="helpInputTop">
-						</fieldset>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-						<fieldset class="form-group">
-							<label for="disabledInput">آیدی</label>
-							<input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="شما نمی توانید من را به روز کنید:">
+                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                        <fieldset class="form-group">
+                            <label asp-for="Descerption">توضیحات</label>
+                            <input type="text" class="form-control" asp-for="Descerption">
+                        </fieldset>
+                    </div>
 
-						</fieldset>
-					</div>
+                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                        <label>تصویر فعلی:</label>
+                        @if (!string.IsNullOrEmpty(Model.ImgUrl))
+                        {
+                            <div class="mb-2">
+                                <img src="@Model.ImgUrl" width="150" style="border-radius:8px" />
+                            </div>
+                        }
+                        <label asp-for="ImgFile">تغییر تصویر:</label>
+                        <input type="file" asp-for="ImgFile" class="form-control-file" />
+                    </div>
 
+                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                        <fieldset class="form-group">
+                            <button type="submit" class="btn btn-success" asp-controller="CategoryManager" asp-action="Edit">
+                                <i class="icon-note"></i> ذخیره
+                            </button>
+                        </fieldset>
+                    </div>
 
-                    <button type="submit" class="btn btn-success">
-                        <i class="icon-note"></i> ذخیره
-                    </button>
+                    <div class="d-grid mb-2">
+                        <div style="color:red">@ViewBag.Error</div>
+                    </div>
                 </div>
-			</div>
-		</form>
-	</div>
+            </div>
+        </form>
+    </div>
 </div>
