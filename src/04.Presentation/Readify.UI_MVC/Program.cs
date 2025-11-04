@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Readify.Domain.BookAgg.Contracts.RepositoryContracts;
 using Readify.Domain.BookAgg.Contracts.ServiceContracts;
 using Readify.Domain.CategoryAgg.Contracts.RepositoryContracts;
@@ -10,6 +11,7 @@ using Readify.Infrastructure.Persistence;
 using Readify.Infrastructure.Repository;
 using Readify.Services;
 using Readify.UI_MVC.CustomMiddlewares;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("Data Source=.;Initial Catalog=ReadifyDb;User ID=sa; Password=123456;Trust Server Certificate=True"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+
+
 
 builder.Services.AddSession();
 
