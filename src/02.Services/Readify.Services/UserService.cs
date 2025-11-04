@@ -70,7 +70,8 @@ public class UserService(IUserRepository userRepository, IFileService fileServic
         var userDto = new UserDto
         {
             Id = user.Id,
-            FullName = $"{user.FirstName} {user.LastName}",
+            FirstName = user.FirstName,
+            LastName = user.LastName,
             ImgUrl = user.ImgUrl,
             Role = user.Role,
             UserName = user.UserName
@@ -89,14 +90,46 @@ public class UserService(IUserRepository userRepository, IFileService fileServic
 
     public Result<bool> Update(int userId, CreateUserDto newUserInfo)
     {
-        var result = userRepository.Update(userId, newUserInfo);
-        return Result<bool>.Success("", result);
+        var existingUser = userRepository.GetEntityById(userId);
+        if (existingUser == null)
+            return Result<bool>.Failure("کاربر پیدا نشد.");
+
+        if (!string.IsNullOrWhiteSpace(newUserInfo.Password))
+            existingUser.HashedPassword = PasswordHasherSha256.HashPassword(newUserInfo.Password);
+        
+
+        if (newUserInfo.ImgFile != null)
+        {
+            if (!string.IsNullOrEmpty(existingUser.ImgUrl))
+                fileService.Delete(existingUser.ImgUrl);
+
+            existingUser.ImgUrl = fileService.Upload(newUserInfo.ImgFile, "Users");
+        }
+
+        existingUser.FirstName = newUserInfo.FirstName;
+        existingUser.LastName = newUserInfo.LastName;
+        existingUser.UserName = newUserInfo.UserName;
+        existingUser.Role = newUserInfo.Role;
+
+        userRepository.Save(); 
+        return Result<bool>.Success("کاربر با موفقیت ویرایش شد.", true);
     }
+
 
     public Result<bool> UpdateStatus(int userId, bool status)
     {
         var result = userRepository.UpdateStatus(userId, status);
         return Result<bool>.Success("", result);
+    }
+
+    public Result<UserDto> GetById(int userId)
+    {
+        var user = userRepository.GetById(userId);
+        if (user == null)
+        {
+            return Result<UserDto>.Success("کاربر یافت نشد", null);
+        }
+        return Result<UserDto>.Success("کاربر یافت نشد", user);
     }
 
     public Result<List<UserDto>> GetAll()

@@ -66,7 +66,8 @@ public class UserRepository(AppDbContext context) : IUserRepository
     {
         return context.Users.Select(u => new UserDto()
         {
-            FullName = $"{u.FirstName} {u.LastName}",
+            FirstName = u.FirstName,
+            LastName = u.LastName,
             Id = u.Id,
             Role = u.Role,
             UserName = u.UserName,
@@ -75,11 +76,26 @@ public class UserRepository(AppDbContext context) : IUserRepository
         }).ToList();
     }
 
+    public UserDto? GetById(int userId)
+    {
+        return context.Users.Where(u => u.Id == userId).Select(u => new UserDto()
+        {
+            FirstName = u.FirstName,
+            LastName = u.LastName,
+            Id = u.Id,
+            ImgUrl = u.ImgUrl,
+            IsActive = u.IsActive,
+            Role = u.Role,
+            UserName = u.UserName
+        }).FirstOrDefault();
+    }
+
     public UserDto? GetByUserName(string username)
     {
         return context.Users.Select(u => new UserDto()
         {
-            FullName = $"{u.FirstName} {u.LastName}",
+            FirstName = u.FirstName,
+            LastName = u.LastName,
             Id = u.Id,
             Role = u.Role,
             UserName = u.UserName,
@@ -108,4 +124,13 @@ public class UserRepository(AppDbContext context) : IUserRepository
        return context.Users.Where(u => u.Id == userId).ExecuteUpdate(setter =>
             setter.SetProperty(u => u.HashedPassword, newPassword));
     }
+    public User? GetEntityById(int id)
+    {
+        return context.Users.FirstOrDefault(u => u.Id == id);
+    }
+    public void Save()
+    {
+        context.SaveChanges();
+    }
+
 }

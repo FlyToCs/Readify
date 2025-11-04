@@ -11,6 +11,7 @@ public interface IUserService
     Result<int> Delete(int userId);
     Result<bool> Update(int userId, CreateUserDto newUserInfo);
     Result<bool> UpdateStatus(int userId, bool status);
+    Result<UserDto> GetById(int userId);
 
     Result<List<UserDto>> GetAll();
     Result<UserDto> GetByUserName(string username);

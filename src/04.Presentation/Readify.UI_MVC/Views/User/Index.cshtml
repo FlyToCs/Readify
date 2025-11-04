@@ -1,4 +1,5 @@
-﻿@model List<Readify.Domain.UserAgg.DTOs.UserDto>
+﻿@using Readify.Domain.UserAgg.DTOs
+@model List<Readify.Domain.UserAgg.DTOs.UserDto>
 
 @{
     ViewBag.Title = "مدیریت کاربران";
@@ -12,8 +13,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title-wrap bar-success">
-                        <h4 class="card-title">لیست کتاب ها</h4>
-                        <a class="btn mr-1 btn-round btn-primary" asp-controller="BookManager" asp-action="Create">افزودن</a>
+                        <h4 class="card-title">لیست کاربر ها</h4>
+                        <a class="btn mr-1 btn-round btn-primary" asp-controller="User" asp-action="Create">افزودن</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -24,6 +25,7 @@
                                     <th>#</th>
                                     <th>تصویر</th>
                                     <th>نام</th>
+                                    <th>نام خانوادگی</th>
                                     <th>نام کاربری</th>
                                     <th>نقش</th>
                                     <th>وضعیت</th>
@@ -37,24 +39,32 @@
                                         <tr>
                                             <td>@user.Id</td>
                                             <td><img src="@user.ImgUrl" width="50px" height="50px" class="rounded-circle" /></td>
-                                            <td>@user.FullName</td>
+                                            <td>@user.FirstName</td>
+                                            <td>@user.LastName</td>
                                             <td>@user.UserName</td>
                                             <td>@user.Role</td>
                                             <td>@user.IsActive</td>
 
                                             <td>
-                                                <form asp-controller="" asp-action="" method="post" class="d-inline-block">
+                                                <form asp-controller="User" asp-action="Edit" method="get" class="d-inline-block">
                                                     <input type="hidden" name="id" value="@user.Id" />
                                                     <button type="submit" class="btn-info btn p-1" title="ویرایش">
                                                         ویرایش
                                                     </button>
                                                 </form>
-                                                <form asp-controller="" asp-action="" method="post" class="d-inline-block">
+                                                <form asp-controller="User" asp-action="Delete" method="post" class="d-inline-block">
                                                     <input type="hidden" name="id" value="@user.Id" />
-                                                    <button type="submit" class="btn-danger btn p-1" title="حذف">
+                                                    <button type="submit" class="btn-danger btn p-1" title="حذف" >
                                                         حذف
                                                     </button>
                                                 </form>
+                                                <form asp-controller="User" asp-action="ChangeStatus" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="id" value="@user.Id" />
+                                                    <button type="submit" class="btn @(user.IsActive ? "btn-warning" : "btn-success") p-1" title="فعال/غیرفعال">
+                                                        @(user.IsActive ? "غیرفعال کن" : "فعال کن")
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     }

@@ -43,7 +43,7 @@ namespace Readify.UI_MVC.Controllers
             HttpContext.Session.SetString("IsActive", result.Data.IsActive.ToString());
 
             if (result.Data.Role == RoleEnum.Admin)
-                return RedirectToAction("Index", "BookManager");
+                return RedirectToAction("Index", "Account");
 
             return RedirectToAction("Index", "Home");
         }
