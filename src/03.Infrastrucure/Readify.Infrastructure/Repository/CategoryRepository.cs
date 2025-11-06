@@ -85,4 +85,9 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
             );
         return effectiveRows > 0;
     }
+
+    public int CategoryCount()
+    {
+        return context.Categories.Count();
+    }
 }

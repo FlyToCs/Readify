@@ -112,6 +112,11 @@ public class BookRepository(AppDbContext context) : IBookRepository
             .ToList();
     }
 
+    public int BookCount()
+    {
+        return context.Books.Count();
+    }
+
 
     public bool Update(int bookId, UpdateBookDto bookInfo)
     {

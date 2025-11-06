@@ -12,5 +12,5 @@ public interface ICategoryService
     Result<GetCategoryDto> GetById(int categoryId);
     bool Delete(int categoryId);
     Result<bool> Update(int categoryId, CreateCategoryDto newCategory);
-
+    int CategoryCount();
 }

@@ -171,4 +171,9 @@ public class UserService(IUserRepository userRepository, IFileService fileServic
         var result = userRepository.UpdatePassword(userId, newPassword);
         return Result<int>.Success("", result);
     }
+
+    public int UserCount()
+    {
+        return userRepository.UserCount();
+    }
 }

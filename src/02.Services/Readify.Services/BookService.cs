@@ -82,7 +82,8 @@ public class BookService(IBookRepository bookRepository,IBookImgService bookImgS
         return Result<bool>.Success("کتاب با موفقیت ویرایش شد.", true);
     }
 
-
-
-
+    public int BookCount()
+    {
+        return bookRepository.BookCount();
+    }
 }

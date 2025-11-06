@@ -18,7 +18,6 @@ public interface IUserRepository
     int UpdatePassword(int userId, string newPassword);
     User? GetEntityById(int id);
     void Save();
-
-
+    int UserCount();
 
 }

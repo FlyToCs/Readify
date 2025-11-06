@@ -133,4 +133,8 @@ public class UserRepository(AppDbContext context) : IUserRepository
         context.SaveChanges();
     }
 
+    public int UserCount()
+    {
+        return context.Users.Count();
+    }
 }

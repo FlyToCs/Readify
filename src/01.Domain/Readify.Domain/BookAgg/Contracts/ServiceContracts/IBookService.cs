@@ -11,4 +11,5 @@ public interface IBookService
     void Delete(int bookId);
     GetBookDto GetBookById(int id);
     Result<bool> Update(int bookId, UpdateBookDto bookInfo);
+    int BookCount();
 }

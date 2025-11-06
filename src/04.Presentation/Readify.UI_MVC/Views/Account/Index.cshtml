@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EntityCountVm;
 @{
     Layout = "_ManagerLayout";
 }
@@ -17,7 +15,7 @@
                     </div>
                     <div class="p-2 media-body">
                         <h6>کاربران</h6>
-                        <h5 class="text-bold-400 mb-0">7</h5>
+                        <h5 class="text-bold-400 mb-0">@Model.UserCount</h5>
                     </div>
                 </div>
             </div>
@@ -32,7 +30,7 @@
                     </div>
                     <div class="p-2 media-body">
                         <h6>کتاب ها</h6>
-                        <h5 class="text-bold-400 mb-0">11</h5>
+                        <h5 class="text-bold-400 mb-0">@Model.BookCount</h5>
                     </div>
                 </div>
             </div>
@@ -47,7 +45,7 @@
                     </div>
                     <div class="p-2 media-body">
                         <h6>دسته بندی ها</h6>
-                        <h5 class="text-bold-400 mb-0">5</h5>
+                        <h5 class="text-bold-400 mb-0">@Model.CategoryCount</h5>
                     </div>
                 </div>
             </div>

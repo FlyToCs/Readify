@@ -83,4 +83,8 @@ public class CategoryService(ICategoryRepository categoryRepository, IFileServic
         return Result<bool>.Success(message: "عملیات با موفقیت انجام شد");
     }
 
+    public int CategoryCount()
+    {
+        return categoryRepository.CategoryCount();
+    }
 }

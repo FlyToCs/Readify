@@ -17,4 +17,5 @@ public interface IUserService
     Result<UserDto> GetByUserName(string username);
     Result<UserLoginDto> LoginGetByUserName(string username);
     Result<int> UpdatePassword(int userId, string newPassword);
+    int UserCount();
 }

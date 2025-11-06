@@ -12,4 +12,5 @@ public interface IBookRepository
     bool Update(int bookId, UpdateBookDto bookInfo);
     GetBookWithImgsDto? GetBookWithImgsById(int id);
     List<BookImgDto> GetBookImgsByBookId(int bookId);
+    int BookCount();
 }

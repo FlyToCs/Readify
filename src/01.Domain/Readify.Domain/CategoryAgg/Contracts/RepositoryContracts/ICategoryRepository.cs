@@ -11,4 +11,5 @@ public interface ICategoryRepository
     string? ImgUrl(int categoryId);
     bool Delete(int categoryId);
     bool Update(int categoryId, CreateCategoryDto newCategory);
+    int CategoryCount();
 }

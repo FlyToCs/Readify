@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Readify.Domain.BookAgg.Contracts.ServiceContracts;
+using Readify.Domain.CategoryAgg.Contracts.ServiceContracts;
 using Readify.Domain.UserAgg.Contracts.ServiceContracts;
 using Readify.Domain.UserAgg.DTOs;
 using Readify.Domain.UserAgg.Enums;
@@ -7,11 +9,17 @@ using Readify.UI_MVC.Models;
 
 namespace Readify.UI_MVC.Controllers
 {
-    public class AccountController(IUserService userService) : Controller
+    public class AccountController(IUserService userService,ICategoryService categoryService, IBookService bookService) : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            var model = new EntityCountVm()
+            {
+                BookCount = bookService.BookCount(),
+                CategoryCount = categoryService.CategoryCount(),
+                UserCount = userService.UserCount()
+            };
+            return View(model);
         }
 
         [HttpGet]
