@@ -1,0 +1,66 @@
+﻿@model List<Readify.Domain.Core.Category.DTOs.GetCategoryDto>
+
+
+@{
+    ViewData["Title"] = "دسته بندی ها -";
+}
+
+@{
+    Layout = "_ManagerLayout";
+}
+
+
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title">لیست دسته بندی ها</h4>
+                        <a class="btn mr-1 btn-round btn-primary "asp-controller="CategoryManager" asp-action="Create">افزودن</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-center">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام</th>
+                                <th>توضیحات</th>
+                                <th>عکس</th>
+                                <th>اقدامات</th>
+                            </tr>
+                            </thead>
+                            
+         
+                            <tbody>
+                            
+                            @{
+                                foreach (var category in Model)
+                                {
+                                    <tr>
+                                        <td>@category.Id</td>
+                                        <td>@category.Name</td>
+                                        <td>@category.Description</td>
+                                        <td><img src="@category.ImgUrl" width="50px"/></td>
+                                        <td>
+                                            <a class="success p-0" data-original-title="" title="" asp-controller="CategoryManager" asp-action="Edit" asp-route-CategoryId="@category.Id">
+                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                            </a>
+
+                                            <a class="danger p-0" data-original-title="" title="" asp-controller="CategoryManager" asp-action="Delete">
+                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr> 
+                                }
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,4 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1. Domain\Services\Readify.Domain.Services\Readify.Domain.Services.csproj" />
+    <ProjectReference Include="..\..\2. Infrastructure\DataAccess\Readify.Infa.Data.Repo.EfCore\Readify.Infa.Data.Repo.EfCore.csproj" />
+    <ProjectReference Include="..\..\2. Infrastructure\Db\Readify.Infa.Db.SqlServer.EfCore\Readify.Infa.Db.SqlServer.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>

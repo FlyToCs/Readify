@@ -1,8 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model CategoryBookViewModel
+
+@{
+    ViewData["Title"] = "صفحه اصلی";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="hero">
+    <h1>هر کتابی که می‌خواهی، اینجا هست</h1>
+    <p>با پیش از صدها عنوان کتاب در دسته‌بندی‌های متفاوت، سفر شگفت‌انگیز خود را آغاز کنید</p>
+    <button>مشاهده پرفروش‌ترین ها</button>
+</section>
+
+<div class="container">
+
+    @await Component.InvokeAsync("Category");
+    
+    @await Component.InvokeAsync("Book");
+
+
+
+
 </div>

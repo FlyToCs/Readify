@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Db\Readify.Infa.Db.SqlServer.EfCore\Readify.Infa.Db.SqlServer.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>

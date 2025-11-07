@@ -1,0 +1,27 @@
+﻿@model List<Readify.Domain.Core.Category.DTOs.GetCategoryDto>
+
+
+
+<h2 class="section-title">دسته‌بندی‌ها</h2>
+
+<div class="categories">
+    @{
+
+        var colors = new[] { "cat-red", "cat-green", "cat-orange", "cat-blue", "cat-yellow" };
+        int i = 0;
+
+        foreach (var category in Model)
+        {
+            var colorClass = colors[i]; 
+            i++;
+
+            <div class="category-card @colorClass">
+                <div class="category-icon">
+                    <img src="@category.ImgUrl" width="50px" alt="@category.Name" />
+                </div>
+                <div class="category-title">@category.Name</div>
+                <div class="category-subtitle">@category.Description</div>
+            </div>
+        }
+    }
+</div>
