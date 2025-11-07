@@ -37,18 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readify.EndPoint.UI_MVC", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{EB295142-239D-4829-A2D6-06E31AD35F41}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{A88B6CFE-83F3-482F-8D2C-243EF99D6783}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Book", "Book", "{FC2A5621-A9A2-4B59-935E-32FB07A3F502}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\Readify\src\04.Presentation\Readify.UI_MVC\Components\Book\BookViewComponent.cs = ..\..\..\Desktop\Readify\src\04.Presentation\Readify.UI_MVC\Components\Book\BookViewComponent.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Category", "Category", "{48F655F4-04AB-42DC-BD3F-A2400EF9A802}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\Readify\src\04.Presentation\Readify.UI_MVC\Components\Category\CategoryViewComponent.cs = ..\..\..\Desktop\Readify\src\04.Presentation\Readify.UI_MVC\Components\Category\CategoryViewComponent.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,9 +87,6 @@ Global
 		{4383CE11-64EC-449F-B94D-4D1AC765DB99} = {2FE8650F-D44A-4239-B599-C75F942CB87C}
 		{BBE0D321-8465-463C-A7E7-F053735B04AB} = {BC33E950-8A79-4C29-AD34-3CF4341535A6}
 		{CD3F3668-323A-4939-A0C1-3BE64EF61E83} = {AC0B81B7-EC83-482C-B792-CA575FD07077}
-		{A88B6CFE-83F3-482F-8D2C-243EF99D6783} = {AC0B81B7-EC83-482C-B792-CA575FD07077}
-		{FC2A5621-A9A2-4B59-935E-32FB07A3F502} = {A88B6CFE-83F3-482F-8D2C-243EF99D6783}
-		{48F655F4-04AB-42DC-BD3F-A2400EF9A802} = {A88B6CFE-83F3-482F-8D2C-243EF99D6783}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {368D0171-8354-49DD-86A3-5D55F7A3381A}
